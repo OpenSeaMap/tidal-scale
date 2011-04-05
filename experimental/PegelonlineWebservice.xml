@@ -1,0 +1,1200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://pegelonline.wsv.de/webservices/version2_3/2007/10/31" xmlns:tns="http://pegelonline.wsv.de/webservices/version2_3/2007/10/31" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	
+	 <wsdl:documentation>
+
+			Entwurf und Implementierung:
+			EES GmbH,
+			Grünauer Strasse 5,
+			12557 Berlin,
+			www.ees-gmbh.de;
+			
+			Im Auftrag der:
+			
+			Bundesanstalt für Wasserbau,
+			Dienstleistungszentrum Informationstechnik im Geschäftsbereich des BMVBS (DLZ-IT BMVBS),
+			Referat IT2 Gewässerkunde,
+			Am Ehrenberg 8,
+			98693 Ilmenau
+	 </wsdl:documentation>
+
+	 <wsdl:types>
+
+		  <schema elementFormDefault="qualified" targetNamespace="http://pegelonline.wsv.de/webservices/version2_3/2007/10/31" xmlns="http://www.w3.org/2001/XMLSchema">
+
+			
+			<!-- 
+				Definition der Abfrageparameter (message-request-Typen) und
+				des Abfrageresponse (message-response-Typen) für die verschiedenen Operationen
+			-->
+
+			   <element name="getParameterList">
+
+				    <complexType/>
+
+			   </element>
+
+			   <element name="getParameterListResponse">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element maxOccurs="unbounded" minOccurs="0" name="getParameterListReturn" type="tns:PegelonlineParameter"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getFlussgebieteList">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element name="parameterName" nillable="true" type="xsd:string"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getFlussgebieteListResponse">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element maxOccurs="unbounded" minOccurs="0" name="getFlussgebieteListReturn" type="tns:PegelonlineFlussgebiet"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getGewaesserList">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element name="parameterName" nillable="true" type="xsd:string"/>
+
+						      <element name="flussgebietName" nillable="true" type="xsd:string"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getGewaesserListResponse">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element maxOccurs="unbounded" minOccurs="0" name="getGewaesserListReturn" type="tns:PegelonlineGewaesser"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getGewaesser">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element name="gewaesserName" nillable="true" type="xsd:string"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getGewaesserResponse">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element name="getGewaesserReturn" nillable="true" type="tns:PegelonlineGewaesser"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getMessstellenList">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element name="parameterName" nillable="true" type="xsd:string"/>
+
+						      <element maxOccurs="unbounded" minOccurs="0" name="gewaesserNamen" nillable="true" type="xsd:string"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getMessstellenListResponse">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element maxOccurs="unbounded" minOccurs="0" name="getMessstellenListReturn" type="tns:PegelonlineMessstelle"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getMessstelle">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element name="messstelleNummer" nillable="true" type="xsd:string"/>
+
+						      <element name="messstelleName" nillable="true" type="xsd:string"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getMessstelleResponse">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element name="getMessstelleReturn" nillable="true" type="tns:PegelonlineMessstelle"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getMessstellenParameter">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element name="messstelleNummer" nillable="true" type="xsd:string"/>
+
+						      <element name="messstelleName" nillable="true" type="xsd:string"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getMessstellenParameterResponse">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element maxOccurs="unbounded" minOccurs="0" name="getMessstellenParameterReturn" type="tns:PegelonlineMessstelleParameter"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getDatenverfuegbarkeit">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element name="parameterName" nillable="false" type="xsd:string"/>
+
+						      <element maxOccurs="unbounded" minOccurs="0" name="messstellenNummern" nillable="true" type="xsd:string"/>
+
+						      <element maxOccurs="unbounded" minOccurs="0" name="messstellenNamen" nillable="true" type="xsd:string"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getDatenverfuegbarkeitResponse">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element name="getDatenverfuegbarkeitReturn" nillable="true" type="tns:PegelonlineDatenverfuegbarkeit"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getPegelinformationen">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element name="parameterName" nillable="true" type="xsd:string"/>
+
+						      <element maxOccurs="unbounded" minOccurs="0" name="messstellenNummern" nillable="true" type="xsd:string"/>
+
+						      <element maxOccurs="unbounded" minOccurs="0" name="messstellenNamen" nillable="true" type="xsd:string"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getPegelinformationenResponse">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element maxOccurs="unbounded" minOccurs="0" name="getPegelinformationenReturn" type="tns:PegelonlinePegelinformation"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getGanglinienUrl">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element name="design" nillable="true" type="xsd:string"/>
+
+						      <element name="parameterName" nillable="true" type="xsd:string"/>
+
+						      <element maxOccurs="unbounded" minOccurs="0" name="messstellenNummern" nillable="true" type="xsd:string"/>
+
+						      <element maxOccurs="unbounded" minOccurs="0" name="messstellenNamen" nillable="true" type="xsd:string"/>
+
+						      <element name="start" nillable="true" type="xsd:dateTime"/>
+
+						      <element name="ende" nillable="true" type="xsd:dateTime"/>
+
+						      <element name="einzelansicht" nillable="true" type="xsd:boolean"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getGanglinienUrlResponse">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element name="getGanglinienUrlReturn" nillable="false" type="xsd:string"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getGanglinienImage">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element name="parameterName" nillable="true" type="xsd:string"/>
+
+						      <element maxOccurs="unbounded" minOccurs="0" name="messstellenNummern" nillable="true" type="xsd:string"/>
+
+						      <element maxOccurs="unbounded" minOccurs="0" name="messstellenNamen" nillable="true" type="xsd:string"/>
+
+						      <element name="start" nillable="true" type="xsd:dateTime"/>
+
+						      <element name="ende" nillable="true" type="xsd:dateTime"/>
+
+						      <element name="laenge" nillable="true" type="xsd:int"/>
+
+						      <element name="hoehe" nillable="true" type="xsd:int"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getGanglinienImageResponse">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element name="getGanglinienImageReturn" nillable="false" type="xsd:base64Binary"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getMessungenDatei">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element name="parameterName" nillable="false" type="xsd:string"/>
+
+						      <element maxOccurs="unbounded" minOccurs="0" name="messstellenNummern" nillable="true" type="xsd:string"/>
+
+						      <element maxOccurs="unbounded" minOccurs="0" name="messstellenNamen" nillable="true" type="xsd:string"/>
+
+						      <element name="start" nillable="true" type="xsd:dateTime"/>
+
+						      <element name="ende" nillable="true" type="xsd:dateTime"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getMessungenDateiResponse">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element name="getMessungenDateiReturn" nillable="false" type="xsd:base64Binary"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getMessungenAktuell">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element name="parameterName" nillable="false" type="xsd:string"/>
+
+						      <element name="messstellenNummern" nillable="true" type="xsd:string"/>
+
+						      <element name="messstellenNamen" nillable="true" type="xsd:string"/>
+
+						      <element name="start" nillable="false" type="xsd:dateTime"/>
+
+						      <element name="ende" nillable="false" type="xsd:dateTime"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			   <element name="getMessungenAktuellResponse">
+
+				    <complexType>
+
+					     <sequence>
+
+						      <element maxOccurs="unbounded" minOccurs="0" name="getMessungenAktuellReturn" type="tns:PegelonlineMessung"/>
+
+					     </sequence>
+
+				    </complexType>
+
+			   </element>
+
+			
+			<!-- Definition der Pegelonline-Webservice-Typen -->
+
+			   <complexType name="PegelonlineParameter">
+
+				    <sequence>
+
+					     <element name="name" nillable="true" type="xsd:string"/>
+
+				    </sequence>
+
+			   </complexType>
+
+			   <complexType name="PegelonlineFlussgebiet">
+
+				    <sequence>
+
+					     <element name="name" nillable="true" type="xsd:string"/>
+
+				    </sequence>
+
+			   </complexType>
+
+			   <complexType name="PegelonlineGewaesser">
+
+				    <sequence>
+
+					     <element name="name" nillable="true" type="xsd:string"/>
+
+				    </sequence>
+
+			   </complexType>
+
+			   <complexType name="PegelonlineMessstelle">
+
+				    <sequence>
+
+					     <element name="kilometerstand" nillable="true" type="xsd:decimal"/>
+
+					     <element name="name" nillable="true" type="xsd:string"/>
+
+					     <element name="nummer" nillable="true" type="xsd:string"/>
+
+					     <element name="pegelonlineKoordinate" nillable="true" type="tns:PegelonlineKoordinate"/>
+
+				    </sequence>
+
+			   </complexType>
+
+			   <complexType name="PegelonlinePegelinformation">
+
+				    <sequence>
+
+					     <element name="aequidistanzmass" nillable="false" type="xsd:int"/>
+
+					     <element name="masseinheit" nillable="false" type="xsd:string"/>
+
+					     <element name="pegelonlineAktuelleMessung" nillable="true" type="tns:PegelonlineMessung"/>
+
+					     <element name="pegelonlineFlussgebiet" nillable="true" type="tns:PegelonlineFlussgebiet"/>
+
+					     <element name="pegelonlineGewaesser" nillable="true" type="tns:PegelonlineGewaesser"/>
+
+					     <element name="pegelonlineKoordinate" nillable="true" type="tns:PegelonlineKoordinate"/>
+
+					     <element name="pegelonlineMessstelle" nillable="true" type="tns:PegelonlineMessstelle"/>
+
+					     <element name="pegelonlineParameter" nillable="true" type="tns:PegelonlineParameter"/>
+
+					     <element name="pegelonlinePegelnullpunkt" nillable="true" type="tns:PegelonlinePegelnullpunkt"/>
+
+						
+					<!-- Array-Definition innerhalb eines des custom-types PegelonlinePegelinformation -->
+
+					     <element name="pegelonlineVorhersagen" nillable="true">
+
+						      <complexType>
+
+							       <sequence>
+
+								        <element maxOccurs="unbounded" minOccurs="0" name="pegelonlineVorhersagen" type="tns:PegelonlineVorhersage"/>
+
+							       </sequence>
+
+						      </complexType>
+					
+					     </element>
+
+					
+					     <element name="pegelonlineWSA" nillable="true" type="tns:PegelonlineWSA"/>
+
+						
+					     <element name="pegelonlineWSD" nillable="false" type="tns:PegelonlineWSD"/>
+
+					
+				    </sequence>
+
+			   </complexType>
+
+			   <complexType name="PegelonlineMessung">
+
+				    <sequence>
+
+					     <element name="messwert" nillable="true" type="xsd:decimal"/>
+
+					     <element name="tendenz" nillable="true" type="xsd:byte"/>
+
+					     <element name="zeitpunkt" nillable="true" type="xsd:dateTime"/>
+
+				    </sequence>
+
+			   </complexType>
+
+			   <complexType name="PegelonlineVorhersage">
+
+				    <sequence>
+
+					     <element name="type" nillable="true" type="xsd:string"/>
+
+					     <element name="wert" nillable="true" type="xsd:decimal"/>
+
+					     <element name="zeitpunkt" nillable="true" type="xsd:dateTime"/>
+
+				    </sequence>
+
+			   </complexType>
+
+			   <complexType name="PegelonlineDatenverfuegbarkeit">
+
+				    <sequence>
+
+					     <element name="ende" nillable="true" type="xsd:dateTime"/>
+
+					     <element name="start" nillable="true" type="xsd:dateTime"/>
+
+				    </sequence>
+
+			   </complexType>
+
+			   <complexType name="PegelonlinePegelnullpunkt">
+
+				    <sequence>
+
+					     <element name="hoehe" nillable="true" type="xsd:decimal"/>
+
+				    </sequence>
+
+			   </complexType>
+
+			   <complexType name="PegelonlineKoordinate">
+
+				    <sequence>
+
+					     <element name="hochwert" nillable="true" type="xsd:decimal"/>
+
+					     <element name="pegelonlineKoordinatensystem" nillable="true" type="tns:PegelonlineKoordinatensystem"/>
+
+					     <element name="rechtswert" nillable="true" type="xsd:decimal"/>
+
+				    </sequence>
+
+			   </complexType>
+
+			   <complexType name="PegelonlineKoordinatensystem">
+
+				    <sequence>
+
+					     <element name="bezugssystem" nillable="true" type="xsd:string"/>
+
+					     <element name="ellipsoid" nillable="true" type="xsd:string"/>
+
+					     <element name="epsgCode" nillable="true" type="xsd:int"/>
+
+					     <element name="streifenZone" nillable="true" type="xsd:string"/>
+
+				    </sequence>
+
+			   </complexType>
+
+			   <complexType name="PegelonlineMessstelleParameter">
+
+				    <sequence>
+
+					      <element name="masseinheit" nillable="true" type="xsd:string"/>
+
+				          <element name="name" nillable="true" type="xsd:string"/>
+
+				          <element name="nameLang" nillable="true" type="xsd:string"/>
+
+					      <element name="pegelonlineMessstelle" nillable="true" type="tns:PegelonlineMessstelle"/>
+
+				          <element name="wert" nillable="true" type="xsd:decimal"/>
+
+				    </sequence>
+
+			   </complexType>
+			
+			   <complexType name="PegelonlineWSD">
+
+				    <sequence>
+
+					      <element name="nameLang" nillable="true" type="xsd:string"/>
+
+				          <element name="ort" nillable="true" type="xsd:string"/>
+
+				          <element name="plz" nillable="true" type="xsd:string"/>
+
+				          <element name="strasse" nillable="true" type="xsd:string"/>
+
+				    </sequence>
+
+			   </complexType>
+
+			   <complexType name="PegelonlineWSA">
+
+				    <sequence>
+
+					      <element name="nameLang" nillable="true" type="xsd:string"/>
+
+				          <element name="ort" nillable="true" type="xsd:string"/>
+
+				          <element name="plz" nillable="true" type="xsd:string"/>
+
+				          <element name="strasse" nillable="true" type="xsd:string"/>
+
+				    </sequence>
+
+			   </complexType>
+
+		  </schema>
+
+	 </wsdl:types>
+
+	
+	
+	 <wsdl:message name="getParameterListRequest">
+
+		  <wsdl:part element="tns:getParameterList" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getParameterListResponse">
+
+		  <wsdl:part element="tns:getParameterListResponse" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getFlussgebieteListRequest">
+
+		  <wsdl:part element="tns:getFlussgebieteList" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getFlussgebieteListResponse">
+
+		  <wsdl:part element="tns:getFlussgebieteListResponse" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getGewaesserListRequest">
+
+		  <wsdl:part element="tns:getGewaesserList" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getGewaesserListResponse">
+
+		  <wsdl:part element="tns:getGewaesserListResponse" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getGewaesserRequest">
+
+		  <wsdl:part element="tns:getGewaesser" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getGewaesserResponse">
+
+		  <wsdl:part element="tns:getGewaesserResponse" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getMessstellenListRequest">
+
+		  <wsdl:part element="tns:getMessstellenList" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getMessstellenListResponse">
+
+		  <wsdl:part element="tns:getMessstellenListResponse" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getMessstelleRequest">
+
+		  <wsdl:part element="tns:getMessstelle" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getMessstelleResponse">
+
+		  <wsdl:part element="tns:getMessstelleResponse" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getMessstellenParameterRequest">
+
+		  <wsdl:part element="tns:getMessstellenParameter" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getMessstellenParameterResponse">
+
+		  <wsdl:part element="tns:getMessstellenParameterResponse" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getDatenverfuegbarkeitRequest">
+
+		  <wsdl:part element="tns:getDatenverfuegbarkeit" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getDatenverfuegbarkeitResponse">
+
+		  <wsdl:part element="tns:getDatenverfuegbarkeitResponse" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getPegelinformationenRequest">
+
+		  <wsdl:part element="tns:getPegelinformationen" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getPegelinformationenResponse">
+
+		  <wsdl:part element="tns:getPegelinformationenResponse" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getGanglinienUrlRequest">
+
+		  <wsdl:part element="tns:getGanglinienUrl" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getGanglinienUrlResponse">
+
+		  <wsdl:part element="tns:getGanglinienUrlResponse" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getGanglinienImageRequest">
+
+		  <wsdl:part element="tns:getGanglinienImage" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getGanglinienImageResponse">
+
+		  <wsdl:part element="tns:getGanglinienImageResponse" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getMessungenDateiRequest">
+
+		  <wsdl:part element="tns:getMessungenDatei" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getMessungenDateiResponse">
+
+		  <wsdl:part element="tns:getMessungenDateiResponse" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getMessungenAktuellRequest">
+
+		  <wsdl:part element="tns:getMessungenAktuell" name="parameters"/>
+
+	 </wsdl:message>
+
+	 <wsdl:message name="getMessungenAktuellResponse">
+
+		  <wsdl:part element="tns:getMessungenAktuellResponse" name="parameters"/>
+
+	 </wsdl:message>
+
+	
+	 <wsdl:portType name="PegelonlineWebservicePortType">
+
+		  <wsdl:operation name="getParameterList">
+
+			   <wsdl:input message="tns:getParameterListRequest" name="getParameterListRequest"/>
+
+			   <wsdl:output message="tns:getParameterListResponse" name="getParameterListResponse"/>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getFlussgebieteList">
+
+			   <wsdl:input message="tns:getFlussgebieteListRequest" name="getFlussgebieteListRequest"/>
+
+			   <wsdl:output message="tns:getFlussgebieteListResponse" name="getFlussgebieteListResponse"/>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getGewaesserList">
+
+			   <wsdl:input message="tns:getGewaesserListRequest" name="getGewaesserListRequest"/>
+
+			   <wsdl:output message="tns:getGewaesserListResponse" name="getGewaesserListResponse"/>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getGewaesser">
+
+			   <wsdl:input message="tns:getGewaesserRequest" name="getGewaesserRequest"/>
+
+			   <wsdl:output message="tns:getGewaesserResponse" name="getGewaesserResponse"/>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getMessstellenList">
+
+			   <wsdl:input message="tns:getMessstellenListRequest" name="getMessstellenListRequest"/>
+
+			   <wsdl:output message="tns:getMessstellenListResponse" name="getMessstellenListResponse"/>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getMessstelle">
+
+			   <wsdl:input message="tns:getMessstelleRequest" name="getMessstelleRequest"/>
+
+			   <wsdl:output message="tns:getMessstelleResponse" name="getMessstelleResponse"/>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getMessstellenParameter">
+
+			   <wsdl:input message="tns:getMessstellenParameterRequest" name="getMessstellenParameterRequest"/>
+
+			   <wsdl:output message="tns:getMessstellenParameterResponse" name="getMessstellenParameterResponse"/>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getDatenverfuegbarkeit">
+
+			   <wsdl:input message="tns:getDatenverfuegbarkeitRequest" name="getDatenverfuegbarkeitRequest"/>
+
+			   <wsdl:output message="tns:getDatenverfuegbarkeitResponse" name="getDatenverfuegbarkeitResponse"/>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getPegelinformationen">
+
+			   <wsdl:input message="tns:getPegelinformationenRequest" name="getPegelinformationenRequest"/>
+
+			   <wsdl:output message="tns:getPegelinformationenResponse" name="getPegelinformationenResponse"/>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getGanglinienUrl">
+
+			   <wsdl:input message="tns:getGanglinienUrlRequest" name="getGanglinienUrlRequest"/>
+
+			   <wsdl:output message="tns:getGanglinienUrlResponse" name="getGanglinienUrlResponse"/>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getGanglinienImage">
+
+			   <wsdl:input message="tns:getGanglinienImageRequest" name="getGanglinienImageRequest"/>
+
+			   <wsdl:output message="tns:getGanglinienImageResponse" name="getGanglinienImageResponse"/>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getMessungenDatei">
+
+			   <wsdl:input message="tns:getMessungenDateiRequest" name="getMessungenDateiRequest"/>
+
+			   <wsdl:output message="tns:getMessungenDateiResponse" name="getMessungenDateiResponse"/>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getMessungenAktuell">
+
+			   <wsdl:input message="tns:getMessungenAktuellRequest" name="getMessungenAktuellRequest"/>
+
+			   <wsdl:output message="tns:getMessungenAktuellResponse" name="getMessungenAktuellResponse"/>
+
+		  </wsdl:operation>
+
+	 </wsdl:portType>
+
+	
+	
+	 <wsdl:binding name="PegelonlineWebserviceSoapBinding" type="tns:PegelonlineWebservicePortType">
+
+		  <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+		  <wsdl:operation name="getParameterList">
+
+			   <wsdlsoap:operation soapAction="http://pegelonline.wsv.de/webservices/version2_3/2007/10/31/getParameterList"/>
+
+			   <wsdl:input name="getParameterListRequest">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:input>
+
+			   <wsdl:output name="getParameterListResponse">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:output>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getFlussgebieteList">
+
+			   <wsdlsoap:operation soapAction="http://pegelonline.wsv.de/webservices/version2_3/2007/10/31/getFlussgebieteList"/>
+
+			   <wsdl:input name="getFlussgebieteListRequest">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:input>
+
+			   <wsdl:output name="getFlussgebieteListResponse">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:output>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getGewaesserList">
+
+			   <wsdlsoap:operation soapAction="http://pegelonline.wsv.de/webservices/version2_3/2007/10/31/getGewaesserList"/>
+
+			   <wsdl:input name="getGewaesserListRequest">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:input>
+
+			   <wsdl:output name="getGewaesserListResponse">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:output>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getGewaesser">
+
+			   <wsdlsoap:operation soapAction="http://pegelonline.wsv.de/webservices/version2_3/2007/10/31/getGewaesser"/>
+
+			   <wsdl:input name="getGewaesserRequest">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:input>
+
+			   <wsdl:output name="getGewaesserResponse">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:output>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getMessstellenList">
+
+			   <wsdlsoap:operation soapAction="http://pegelonline.wsv.de/webservices/version2_3/2007/10/31/getMessstellenList"/>
+
+			   <wsdl:input name="getMessstellenListRequest">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:input>
+
+			   <wsdl:output name="getMessstellenListResponse">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:output>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getMessstelle">
+
+			   <wsdlsoap:operation soapAction="http://pegelonline.wsv.de/webservices/version2_3/2007/10/31/getMessstelle"/>
+
+			   <wsdl:input name="getMessstelleRequest">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:input>
+
+			   <wsdl:output name="getMessstelleResponse">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:output>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getMessstellenParameter">
+
+			   <wsdlsoap:operation soapAction="http://pegelonline.wsv.de/webservices/version2_3/2007/10/31/getMessstellenParameter"/>
+
+			   <wsdl:input name="getMessstellenParameterRequest">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:input>
+
+			   <wsdl:output name="getMessstellenParameterResponse">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:output>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getDatenverfuegbarkeit">
+
+			   <wsdlsoap:operation soapAction="http://pegelonline.wsv.de/webservices/version2_3/2007/10/31/getDatenverfuegbarkeit"/>
+
+			   <wsdl:input name="getDatenverfuegbarkeitRequest">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:input>
+
+			   <wsdl:output name="getDatenverfuegbarkeitResponse">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:output>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getPegelinformationen">
+
+			   <wsdlsoap:operation soapAction="http://pegelonline.wsv.de/webservices/version2_3/2007/10/31/getPegelinformationen"/>
+
+			   <wsdl:input name="getPegelinformationenRequest">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:input>
+
+			   <wsdl:output name="getPegelinformationenResponse">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:output>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getGanglinienUrl">
+
+			   <wsdlsoap:operation soapAction="http://pegelonline.wsv.de/webservices/version2_3/2007/10/31/getGanglinienUrl"/>
+
+			   <wsdl:input name="getGanglinienUrlRequest">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:input>
+
+			   <wsdl:output name="getGanglinienUrlResponse">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:output>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getGanglinienImage">
+
+			   <wsdlsoap:operation soapAction="http://pegelonline.wsv.de/webservices/version2_3/2007/10/31/getGanglinienImage"/>
+
+			   <wsdl:input name="getGanglinienImageRequest">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:input>
+
+			   <wsdl:output name="getGanglinienImageResponse">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:output>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getMessungenDatei">
+
+			   <wsdlsoap:operation soapAction="http://pegelonline.wsv.de/webservices/version2_3/2007/10/31/getMessungenDatei"/>
+
+			   <wsdl:input name="getMessungenDateiRequest">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:input>
+
+			   <wsdl:output name="getMessungenDateiResponse">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:output>
+
+		  </wsdl:operation>
+
+		  <wsdl:operation name="getMessungenAktuell">
+
+			   <wsdlsoap:operation soapAction="http://pegelonline.wsv.de/webservices/version2_3/2007/10/31/getMessungenAktuell"/>
+
+			   <wsdl:input name="getMessungenAktuellRequest">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:input>
+
+			   <wsdl:output name="getMessungenAktuellResponse">
+
+				    <wsdlsoap:body use="literal"/>
+
+			   </wsdl:output>
+
+		  </wsdl:operation>
+
+	 </wsdl:binding>
+
+	
+	
+	 <wsdl:service name="PegelonlineWebservice">
+
+		  <wsdl:port binding="tns:PegelonlineWebserviceSoapBinding" name="PegelonlineWebservicePort">
+
+			   <wsdlsoap:address location="http://www.pegelonline.wsv.de/webservices/version2_3/2007/10/31/PegelonlineWebservice"/>
+
+		  </wsdl:port>
+
+	 </wsdl:service>
+
+	
+	
+</wsdl:definitions>
