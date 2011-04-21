@@ -1,7 +1,7 @@
 <?php
 /*
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
-letzte Änderung 18.04.11 17:20 Uhr
+letzte Änderung 20.04.11 12:20 Uhr
 */
 
 /*
@@ -168,6 +168,30 @@ class Util {
 		exec("wget " . $escape);
 		return;
 	}
+	
+	/*
+     * Wandelt DATE_W3C in ein "normales" Datum um
+	 * http://php.net/manual/en/class.datetime.php
+	 * Die if abfrage ist um kompatiblität mit php versionen kleiner 5.3 herzustellen,
+	 * allerdings so nur abwärtskompatibel bis 5.1
+     * @param $datew3c
+     * @return $date
+     */
+	public static function convertTime($datew3c){
+		$localTimezone = new DateTimeZone("Europe/Berlin");
+		$date = new DateTime($datew3c, $localTimezone);
+		//http://de3.php.net/manual/de/function.phpversion.php
+		 if (strnatcmp(phpversion(),'5.3.0') >= 0)
+		{
+		$date->setTimezone($localTimezone);
+		}
+		else
+		{
+		//$date->setTimezone($localTimezone);
+		}
+		return $date;
+	}
+	
 	
 }
 ?>
