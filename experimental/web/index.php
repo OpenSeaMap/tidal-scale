@@ -1,6 +1,6 @@
 <!--
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
-letzte Änderung 21.04.11 12:55 Uhr
+letzte Änderung 24.04.11 11:24 Uhr
 -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <html>
@@ -10,6 +10,16 @@ letzte Änderung 21.04.11 12:55 Uhr
     <body>
 	<table width="100%" border="0">
       <tr>
+        <td>Vorbeitungen</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td><a href="db_anlegen.php" target="_blank">db_anlegen.php</a></td>
+        <td><a href="info.php" target="_blank">info.php</a></td>
+        <td>&nbsp;</td>
+      </tr>
+	  <tr>
         <td>XML Daten </td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
