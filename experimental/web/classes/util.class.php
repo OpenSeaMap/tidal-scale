@@ -1,7 +1,7 @@
 <?php
 /*
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
-letzte Änderung 20.04.11 12:20 Uhr
+letzte Änderung 28.04.11 17:20 Uhr
 */
 
 /*
@@ -51,6 +51,25 @@ class Util {
 		$string = str_replace('.','', $string);
 		return $string;
     }
+	
+	/*
+     * Wandelt die Tendenz in Worte um
+     * @param $tendenz zahl
+     * @return $tendenz string
+     */
+	public static function convertTendenz($tendenz){
+	
+		if($tendenz == 1) { 
+		$tendenz = 'Steigend'; 
+		}
+		elseif($tendenz == -1) {
+		$tendenz = 'Fallend'; 
+		}
+		else {
+		$tendenz = 'Gleich'; 
+		}	
+		return $tendenz;
+	}
 	
     /*
      * zu utf-8 umwandlung
@@ -191,7 +210,6 @@ class Util {
 		}
 		return $date;
 	}
-	
 	
 }
 ?>
