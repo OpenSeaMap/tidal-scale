@@ -28,7 +28,7 @@ class MySQL {
 				Util::error('DB "'.$db.'" not available!');
 			}
 		} else {
-			$sqlInfo = 'DB Connection to "'.$host.'" (User:"'.$user.' failed") '; 
+			$msqlInfo = 'DB Connection to "'.$host.'" (User:"'.$user.' failed") '; 
 			Log::write(LOG_SQL, $msqlInfo);
 		}
 		
