@@ -1,11 +1,9 @@
 <?php
 //test ausgaben entfernen
-//echos entfernen
-
 
 /*
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
-letzte Änderung 01.05.11 15:25 Uhr
+letzte Änderung 06.05.11 16:25 Uhr
 */
 
 /*
@@ -71,7 +69,7 @@ public static function compare_coord() {
 		} 
 	  }
 	}
-	
+
     /*
 	 * hiermit werden die GK koordinaten in lat und lon umgerechnet mithilfe eines externen Scripts
 	 * transformiert die Koordinaten nur, wenn vorher keine gesetzt sind
@@ -81,8 +79,8 @@ public static function set_coord_extern() {
 
 		global $db;
 		
-	  //geeignete anzahl der abfrage wählen hier ehr weniger 20-40 sollte okay sein
-	  $result5Pegel = $db->qry(" SELECT pegelnummer,Rechtswert_GK,Hochwert_GK,lat,lon,daten_fehler FROM ".TABLE_PEGEL2." WHERE `lat` = '' AND `lon` = '' AND `Rechtswert_GK` != '0.00' AND `Hochwert_GK` != '0.00' ORDER BY `pegelnummer` DESC LIMIT 0, 20 ");
+	  //geeignete anzahl der abfrage wählen hier ehr weniger 40-80 sollte okay sein
+	  $result5Pegel = $db->qry(" SELECT pegelnummer,Rechtswert_GK,Hochwert_GK,lat,lon,daten_fehler FROM ".TABLE_PEGEL2." WHERE `lat` = '' AND `lon` = '' AND `Rechtswert_GK` != '0.00' AND `Hochwert_GK` != '0.00' ORDER BY `pegelnummer` DESC LIMIT 0, 40 ");
 	  if ($result5Pegel){
 		echo 'erfolg verbindung und auswahl';
 		//ins logfile schreiben
@@ -136,7 +134,66 @@ public static function set_coord_extern() {
 	  }
 		
 	}
-	
+
+    /*
+	 * hiermit werden die GK-Koordinaten in lat und lon umgerechnet mithilfe der Formel aus [Gro76] und [HKL94]
+	 * transformiert die Koordinaten nur, wenn vorher keine gesetzt sind
+     */	
+public static function set_coord_formel() {
+
+		global $db;
+		
+	//geeignete Anzahl der Abfrage wählen, damit die Berechnungen in unter 30 sekunden erfolgen können, zwischen 500 und 1000 ist ein guter wert
+	  $result5Pegel = $db->qry(" SELECT pegelnummer,Rechtswert_GK,Hochwert_GK,lat,lon,daten_fehler FROM ".TABLE_PEGEL2." WHERE `lat` = '' AND `lon` = '' AND `Rechtswert_GK` != '0.00' AND `Hochwert_GK` != '0.00' ORDER BY `pegelnummer` DESC LIMIT 0, 500 ");
+	  if ($result5Pegel){
+		echo 'erfolg verbindung und auswahl';
+		//ins logfile schreiben
+		$msg = "erfolg verbindung und auswahl";
+		Log::write(LOG_OTHER, $msg);
+		}
+		else {
+		echo 'fehler verbindung und auswahl';
+		//ins logfile schreiben
+		$msg = "fehler verbindung und auswahl";
+		Log::write(LOG_OTHER, $msg);
+		}
+	  
+	  for ($i = 0; $i < mysql_num_rows($result5Pegel); $i++  )
+	  { 
+	  	while ($row5Pegel = mysql_fetch_array($result5Pegel))
+	      	{ 
+			$pegelnummer = $row5Pegel["pegelnummer"];
+			$rw = $row5Pegel["Rechtswert_GK"];
+			$hw = $row5Pegel["Hochwert_GK"];
+		
+		//transformation mit formel
+		$avar = Transformation::GK_geo($hw,$rw);
+		
+		//wichtig ist php hat nur einen return wert dieser ist hier ein array also passend setzten
+		$lat = $avar[0];
+		$lon = $avar[1];
+		
+	$result = $db->qry(" UPDATE ".TABLE_PEGEL2." SET 
+	pegelnummer='$pegelnummer',
+	lat='$lat',
+	lon='$lon'
+	WHERE pegelnummer='$pegelnummer' ");
+
+	if ($result){
+	echo 'erfolg update koordinaten';
+	echo '<br><br>';
+	//ins logfile schreiben
+	$msg = "erfolg update koordinaten";
+	Log::write(LOG_OTHER, $msg);
+	}
+	else {
+	echo 'fehler bitte in sql.log nachsehen';
+	}
+		
+	} }
+		
+	}
+		
     /*
 	 * hiermit werden die GK-Koordinaten in lat und lon umgerechnet mit hilfe von festen Paramtern
 	 * transformiert die Koordinaten nur, wenn vorher keine gesetzt sind
@@ -146,8 +203,8 @@ public static function set_coord_aehnlichkeit() {
 
 		global $db;
 		
-			//geeignete Anzahl der Abfrage wählen, damit die Berechnungen in unter 30 sekunden erfolgen können, 1500 - 2000 ist okay
-	  $result5Pegel = $db->qry(" SELECT pegelnummer,Rechtswert_GK,Hochwert_GK,lat,lon,daten_fehler FROM ".TABLE_PEGEL2." WHERE `lat` = '' AND `lon` = '' AND `Rechtswert_GK` != '0.00' AND `Hochwert_GK` != '0.00' ORDER BY `pegelnummer` DESC LIMIT 0, 500 ");
+			//geeignete Anzahl der Abfrage wählen, damit die Berechnungen in unter 30 sekunden erfolgen können, 1500 - 3000 ist okay
+	  $result5Pegel = $db->qry(" SELECT pegelnummer,Rechtswert_GK,Hochwert_GK,lat,lon,daten_fehler FROM ".TABLE_PEGEL2." WHERE `lat` = '' AND `lon` = '' AND `Rechtswert_GK` != '0.00' AND `Hochwert_GK` != '0.00' ORDER BY `pegelnummer` DESC LIMIT 0, 1500 ");
 	  if ($result5Pegel){
 		echo 'erfolg verbindung und auswahl';
 		//ins logfile schreiben
@@ -196,8 +253,167 @@ public static function set_coord_aehnlichkeit() {
 		
 	} }
 		
-	}	
+	}
 
+    /*
+	 * hiermit werden die GK-Koordinaten in lat und lon umgerechnet mithilfe der Formeln [GJ11]
+	 * transformiert die Koordinaten nur, wenn vorher keine gesetzt sind
+	 * für Bessel-Ellipsoid
+     */	
+public static function set_coord_bessel() {
+
+		global $db;
+		
+	//geeignete Anzahl der Abfrage wählen, damit die Berechnungen in unter 30 sekunden erfolgen können, zwischen 400 und 600 ist ein guter wert
+	  $result5Pegel = $db->qry(" SELECT pegelnummer,Rechtswert_GK,Hochwert_GK,lat,lon,streifenzone,ellipsoid,daten_fehler,pnp FROM ".TABLE_PEGEL2." WHERE `lat` = '' AND `lon` = '' AND `Rechtswert_GK` != '0.00' AND `Hochwert_GK` != '0.00' AND `ellipsoid` = 'Bessel 1841' ORDER BY `pegelnummer` DESC LIMIT 0, 450 ");
+	  if ($result5Pegel){
+		echo 'erfolg verbindung und auswahl';
+		//ins logfile schreiben
+		$msg = "erfolg verbindung und auswahl";
+		Log::write(LOG_OTHER, $msg);
+		}
+		else {
+		echo 'fehler verbindung und auswahl';
+		//ins logfile schreiben
+		$msg = "fehler verbindung und auswahl";
+		Log::write(LOG_OTHER, $msg);
+		}
+	  
+	  for ($i = 0; $i < mysql_num_rows($result5Pegel); $i++  )
+	  { 
+	  	while ($row5Pegel = mysql_fetch_array($result5Pegel))
+	      	{ 
+			$pegelnummer = $row5Pegel["pegelnummer"];
+			$rw = $row5Pegel["Rechtswert_GK"];
+			$hw = $row5Pegel["Hochwert_GK"];
+			$streifen = $row5Pegel["streifenzone"];
+			$pnp = $row5Pegel["pnp"];
+
+		//jetzt wird am leerzeichen getrennt und in ein arry geschrieben
+		$avar = explode(" ", $streifen);
+		
+		//transformation mit formel
+		$bvar = Transformation::GK_geo_bessel($hw,$rw,$avar[1]);
+		echo '<br><br>l und b<br>';
+		var_dump($bvar);
+		
+		$cvar = Transformation::geo_bessel_kart($bvar[0],$bvar[1],$pnp);
+		echo '<br><br>kart<br>';
+		var_dump($cvar);
+		
+		$dvar = Transformation::rotation_translation_bessel_wgs84($cvar[0],$cvar[1],$cvar[2]);
+		echo '<br><br>nach rot und trans<br>';
+		var_dump($dvar);
+		
+		$evar = Transformation::kart_wgs84_geo($dvar[0],$dvar[1],$dvar[2]);
+		echo '<br><br>nach umwandlung<br>';
+		var_dump($evar);
+		
+		//wichtig ist php hat nur einen return wert dieser ist hier ein array also passend setzten
+		$lat = $evar[0];
+		$lon = $evar[1];
+		
+	$result = $db->qry(" UPDATE ".TABLE_PEGEL2." SET 
+	pegelnummer='$pegelnummer',
+	lat='$lat',
+	lon='$lon'
+	WHERE pegelnummer='$pegelnummer' ");
+
+	if ($result){
+	echo '<br><br>';
+	echo 'erfolg update koordinaten';
+	//ins logfile schreiben
+	$msg = "erfolg update koordinaten";
+	Log::write(LOG_OTHER, $msg);
+	}
+	else {
+	echo 'fehler bitte in sql.log nachsehen';
+	}
+		
+	} }
+		
+}
+
+    /*
+	 * hiermit werden die GK-Koordinaten in lat und lon umgerechnet mithilfe der Formeln [GJ11]
+	 * transformiert die Koordinaten nur, wenn vorher keine gesetzt sind
+	 * für Krassowsky-Ellipsoid
+     */	
+public static function set_coord_krass() {
+
+		global $db;
+		
+	//geeignete Anzahl der Abfrage wählen, damit die Berechnungen in unter 30 sekunden erfolgen können, zwischen 400 und 600 ist ein guter wert
+	  $result5Pegel = $db->qry(" SELECT pegelnummer,Rechtswert_GK,Hochwert_GK,lat,lon,streifenzone,ellipsoid,daten_fehler,pnp FROM ".TABLE_PEGEL2." WHERE `lat` = '' AND `lon` = '' AND `Rechtswert_GK` != '0.00' AND `Hochwert_GK` != '0.00' AND `ellipsoid` = 'Krassovski' ORDER BY `pegelnummer` DESC LIMIT 0, 450 ");
+	  if ($result5Pegel){
+		echo 'erfolg verbindung und auswahl';
+		//ins logfile schreiben
+		$msg = "erfolg verbindung und auswahl";
+		Log::write(LOG_OTHER, $msg);
+		}
+		else {
+		echo 'fehler verbindung und auswahl';
+		//ins logfile schreiben
+		$msg = "fehler verbindung und auswahl";
+		Log::write(LOG_OTHER, $msg);
+		}
+	  
+	  for ($i = 0; $i < mysql_num_rows($result5Pegel); $i++  )
+	  { 
+	  	while ($row5Pegel = mysql_fetch_array($result5Pegel))
+	      	{ 
+			$pegelnummer = $row5Pegel["pegelnummer"];
+			$rw = $row5Pegel["Rechtswert_GK"];
+			$hw = $row5Pegel["Hochwert_GK"];
+			$streifen = $row5Pegel["streifenzone"];
+			$pnp = $row5Pegel["pnp"];
+
+		//jetzt wird am leerzeichen getrennt und in ein arry geschrieben
+		$avar = explode(" ", $streifen);
+		
+		//transformation mit formel
+		$bvar = Transformation::GK_geo_krass($hw,$rw,$avar[1]);
+		echo '<br><br>l und b<br>';
+		var_dump($bvar);
+		
+		$cvar = Transformation::geo_krass_kart($bvar[0],$bvar[1],$pnp);
+		echo '<br><br>kart<br>';
+		var_dump($cvar);
+		
+		$dvar = Transformation::rotation_translation_krass_wgs84($cvar[0],$cvar[1],$cvar[2]);
+		echo '<br><br>nach rot und trans<br>';
+		var_dump($dvar);
+		
+		$evar = Transformation::kart_wgs84_geo($dvar[0],$dvar[1],$dvar[2]);
+		echo '<br><br>nach umwandlung<br>';
+		var_dump($evar);
+		
+		//wichtig ist php hat nur einen return wert dieser ist hier ein array also passend setzten
+		$lat = $evar[0];
+		$lon = $evar[1];
+		
+	$result = $db->qry(" UPDATE ".TABLE_PEGEL2." SET 
+	pegelnummer='$pegelnummer',
+	lat='$lat',
+	lon='$lon'
+	WHERE pegelnummer='$pegelnummer' ");
+
+	if ($result){
+	echo '<br><br>';
+	echo 'erfolg update koordinaten';
+	//ins logfile schreiben
+	$msg = "erfolg update koordinaten";
+	Log::write(LOG_OTHER, $msg);
+	}
+	else {
+	echo 'fehler bitte in sql.log nachsehen';
+	}
+		
+	} }
+		
+}
+
+		
 	/**
 	 * Speichert die von SimpleXML übergebenen Objekte in der Datenbank
 	 * hier für das statische XML-Dokument

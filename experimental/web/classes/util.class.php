@@ -1,7 +1,7 @@
 <?php
 /*
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
-letzte Änderung 28.04.11 17:20 Uhr
+letzte Änderung 06.05.11 16:20 Uhr
 */
 
 /*
@@ -211,5 +211,149 @@ class Util {
 		return $date;
 	}
 	
+	/*
+     * Wandelt einen nur aus GROSSBUCHSTABEN bestehenden String um
+	 * http://php.net/manual/de/function.ucfirst.php
+     * @param $string
+     * @return $string
+     */
+	public static function convertUpperString($string){
+	$string = ucfirst(strtolower($string));
+		return $string;
+	}
+	
+	/*
+     * Wandelt die Tendenz in Pfeile um
+	 * Idee von Markus Bärlocher
+     * @param $tendenz
+     * @return $tendenz
+     */
+	public static function convertArrow($tendenz){
+	
+		if($tendenz == 'Steigend') { 
+		$tendenz = '&uarr;'; 
+		}
+		elseif($tendenz == 'Fallend') {
+		$tendenz = '&darr;'; 
+		}
+		else {
+		$tendenz = '&harr;'; 
+		}	
+		
+	/*
+	&harr;	&#8596;	gleich
+	&darr;	&#8595;	fallend
+	&uarr;	&#8593;	steigend
+	*/
+		
+		return $tendenz;
+	}
+
+	/*
+     * Wandelt die Tendenz in Pfeile um für OSM angepasst
+	 * Idee von Markus Bärlocher
+     * @param $tendenz
+     * @return $tendenz
+     */
+	public static function convertArrow_osm($tendenz){
+	
+		if($tendenz == 'Steigend') { 
+		$tendenz = '\u2191'; 
+		}
+		elseif($tendenz == 'Fallend') {
+		$tendenz = '\u2193'; 
+		}
+		else {
+		$tendenz = '\u2194'; 
+		}	
+		
+	/*
+	name	nummer	wort	hexwert
+	&harr;	&#8596;	gleich \u2194
+	&darr;	&#8595;	fallend \u2193
+	&uarr;	&#8593;	steigend \u2191
+	*/
+		return $tendenz;
+	}
+	
+	/*
+     * Stellt Informationen zu den Fehlern dar
+     * @param $daten_fehler
+     * @return $string
+     */
+	public static function show_daten_fehler($fehler){
+	
+		//bei 0 gibt es keine fehlerhaften daten
+		//bei 1 liegen unvollstaendige / fehlerhafte daten vor
+		//bei 2 ist der pnp nicht vorhanden
+		//bei 3 fehlen koordinaten informationen
+		if($fehler == 0) { 
+		$fehler = '<br>'; 
+		}
+		elseif($fehler == 1) {
+		$fehler = '<br><b>Ausser Betrieb</b><br>'; 
+		}
+		elseif($fehler == 2) {
+		$fehler = '<br>Kein PnP Wert vorhanden<br>'; 
+		}
+		else {
+		$fehler = '<br>'; 
+		}	
+		return $fehler;
+	}
+	
+	/*
+     * Stellt Informationen zu den Fehlern dar für OSM angepasst
+     * @param $daten_fehler
+     * @return $string
+     */
+	public static function show_daten_fehler_osm($fehler){
+	
+		//bei 0 gibt es keine fehlerhaften daten
+		//bei 1 liegen unvollstaendige / fehlerhafte daten vor
+		//bei 2 ist der pnp nicht vorhanden
+		//bei 3 fehlen koordinaten informationen
+		if($fehler == 0) { 
+		$fehler = ''; 
+		}
+		elseif($fehler == 1) {
+		$fehler = '<b>Ausser Betrieb</b>'; 
+		}
+		elseif($fehler == 2) {
+		$fehler = 'Kein PnP Wert vorhanden'; 
+		}
+		else {
+		$fehler = ''; 
+		}	
+		return $fehler;
+	}
+	
+	/*
+     * Liefert einen "fehlerfreien" String
+     * @param fstring - Name
+     * @return String - verbesserter Name
+     */
+    public static function getCleanString($string) {
+    	$umlaute = array("Ã–","Ã„","Ãœ");
+		$replace = array('&Auml;','&Ouml;','&Uuml;');
+		//Umlaute ersetzen
+		$string2 = str_replace($umlaute, $replace, $string);
+    	return $string2;
+    }
+	
+	/*
+     * Liefert einen "fehlerfreien" String für OSM angepasst
+	 * es werden direkt kleinbuchstaben eingesetzt da die php strtolower funktion die escaped zeichen ignoriert
+     * @param fstring - Name
+     * @return String - verbesserter Name
+     */
+    public static function getCleanString_osm($string) {
+    	$umlaute = array("Ã–","Ã„","Ãœ");
+		$replace = array('\u00E4','\u00F6','\u00FC');
+		//Umlaute ersetzen
+		$string2 = str_replace($umlaute, $replace, $string);
+    	return $string2;
+    }
+		
 }
 ?>
