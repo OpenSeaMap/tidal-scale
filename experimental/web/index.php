@@ -1,6 +1,6 @@
 <!--
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
-letzte Änderung 30.04.11 12:13 Uhr
+letzte Änderung 10.05.11 18:13 Uhr
 -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <html>
@@ -56,8 +56,38 @@ letzte Änderung 30.04.11 12:13 Uhr
       </tr>
       <tr>
         <td><a href="koordinaten_extern.php" target="_blank">koordinaten_extern.php</a></td>
-        <td>&nbsp;</td>
+        <td><a href="koordinaten_formel.php" target="_blank">koordinaten_formel.php</a></td>
         <td><a href="koordinaten_aehnlichkeit.php" target="_blank">koordinaten_aehnlichkeit.php</a></td>
+      </tr>
+	  <tr>
+        <td>Koordinaten Umwandlung (fertig)</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td><a href="koordinaten_bessel.php" target="_blank">koordinaten_bessel.php</a></td>
+        <td><a href="koordinaten_krass.php" target="_blank">koordinaten_krass.php</a></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>Zur Map </td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>map test mit (textfile) markern</td>
+        <td><a href="pegelanzeigen_sta.php" target="_blank">pegelanzeigen_sta.php</a></td>
+        <td>das textfile muss von hand kopiert werden</td>
+      </tr>
+	  <tr>
+        <td>map mit dynamischen markern</td>
+        <td><a href="pegelanzeigen.php" target="_blank">pegelanzeigen.php</a></td>
+        <td>direkter aufruf geht nicht muss in osm eingebunden werden</a></td>
+      </tr>
+	  <tr>
+        <td>map mit dynamischen markern osm (fertig)</td>
+        <td><a href="getTidalTest.php" target="_blank">getTidalTest.php</a></td>
+        <td>direkter aufruf geht nicht muss in osm eingebunden werden</a></td>
       </tr>
     </table>
 	<br><br>

@@ -1,7 +1,7 @@
 <?php
 /*
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
-letzte Änderung 06.05.11 16:20 Uhr
+letzte Änderung 11.05.11 12:15 Uhr
 */
 
 /*
@@ -200,7 +200,7 @@ class Util {
 		$localTimezone = new DateTimeZone("Europe/Berlin");
 		$date = new DateTime($datew3c, $localTimezone);
 		//http://de3.php.net/manual/de/function.phpversion.php
-		 if (strnatcmp(phpversion(),'5.3.0') >= 0)
+		 if (strnatcmp(phpversion(),'5.2.0') >= 0)
 		{
 		$date->setTimezone($localTimezone);
 		}
@@ -218,7 +218,8 @@ class Util {
      * @return $string
      */
 	public static function convertUpperString($string){
-	$string = ucfirst(strtolower($string));
+	//$string = ucfirst(strtolower($string));
+	$string = ucwords(strtolower($string));
 		return $string;
 	}
 	
@@ -291,10 +292,10 @@ class Util {
 		$fehler = '<br>'; 
 		}
 		elseif($fehler == 1) {
-		$fehler = '<br><b>Ausser Betrieb</b><br>'; 
+		$fehler = '<br><font color="red"><b>Ausser Betrieb</b></font><br>'; 
 		}
 		elseif($fehler == 2) {
-		$fehler = '<br>Kein PnP Wert vorhanden<br>'; 
+		$fehler = '<br><font color="red">Kein PnP Wert vorhanden</font><br>'; 
 		}
 		else {
 		$fehler = '<br>'; 
@@ -317,10 +318,10 @@ class Util {
 		$fehler = ''; 
 		}
 		elseif($fehler == 1) {
-		$fehler = '<b>Ausser Betrieb</b>'; 
+		$fehler = '<font color="red"><b>Ausser Betrieb</b></font>'; 
 		}
 		elseif($fehler == 2) {
-		$fehler = 'Kein PnP Wert vorhanden'; 
+		$fehler = '<font color="red">Kein PnP Wert vorhanden</font>'; 
 		}
 		else {
 		$fehler = ''; 
