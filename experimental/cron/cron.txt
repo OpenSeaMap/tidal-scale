@@ -1,0 +1,1 @@
+30	*	*	*	*	/bin/bash /pfad/bash.sh >/dev/null 2>&1
