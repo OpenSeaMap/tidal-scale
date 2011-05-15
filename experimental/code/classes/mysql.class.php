@@ -1,7 +1,7 @@
 <?php
 /*
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
-letzte Änderung 23.04.11 15:20 Uhr
+letzte Änderung 15.05.11 15:02 Uhr
 */
 
 class MySQL {
@@ -25,7 +25,8 @@ class MySQL {
 		$this->dbCon = @mysql_connect($host, $user, $pw);
 		if ($this->dbCon) {
 			if (!@mysql_select_db($db, $this->dbCon)) {
-				Util::error('DB "'.$db.'" not available!');
+				$msqlInfo = 'DB "'.$db.'" not available!';
+				Log::write(LOG_SQL, $msqlInfo);
 			}
 		} else {
 			$msqlInfo = 'DB Connection to "'.$host.'" (User:"'.$user.' failed") '; 
