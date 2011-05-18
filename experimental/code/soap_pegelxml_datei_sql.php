@@ -1,6 +1,8 @@
 <!--
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 27.04.11 16:31 Uhr
+Aufgabe der Datei:
+SOAP XML-Datei in MySQL einfügen
 -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <html>

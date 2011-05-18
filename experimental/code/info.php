@@ -1,6 +1,8 @@
 <!--
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 23.04.11 16:21 Uhr
+Aufgabe der Datei:
+Ausgabe von Informationen zu verfügbaren Erweiterungen
 -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <html>

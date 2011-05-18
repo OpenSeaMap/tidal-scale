@@ -1,6 +1,8 @@
 /*
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 10.05.11 15:14 Uhr
+Aufgabe der Datei:
+Stellt die Marker auf OSM dar.
  */
 
 function get_poi_url (bounds) {

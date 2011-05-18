@@ -1,15 +1,11 @@
 <?php
-//test ausgaben entfernen
-
 /*
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 06.05.11 16:25 Uhr
+alle wichtigen Funktionen die mit der Datenspeicherung in MySQL etwas zu tun haben,
+in einer Klasse zusammengefasst
 */
 
-/*
-* alle wichtigen Funktionen die mit der Datenspeicherung in MySQL etwas zu tun haben,
-* in einer Klasse zusammengefasst
-*/
 class Daten {
 	
     function __construct() {

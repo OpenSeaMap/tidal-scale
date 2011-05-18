@@ -1,6 +1,8 @@
 <!--
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 24.04.11 12:54 Uhr
+Aufgabe der Datei:
+Die erforderlichen Tabellen werden in der Datenbank angelegt
 -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <html>

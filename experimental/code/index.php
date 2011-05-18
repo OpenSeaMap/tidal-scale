@@ -1,6 +1,8 @@
 <!--
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 10.05.11 18:13 Uhr
+Aufgabe der Datei:
+Index
 -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <html>

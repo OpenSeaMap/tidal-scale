@@ -1,6 +1,8 @@
 <!--
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 30.04.11 12:37 Uhr
+Aufgabe der Datei:
+Vergleich der Umrechungen.
 -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <html>

@@ -1,6 +1,8 @@
 <!--
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 30.04.11 12:11 Uhr
+Aufgabe der Datei:
+Umrechnung der Koordinaten mithilfe eines LGS.
 -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <html>

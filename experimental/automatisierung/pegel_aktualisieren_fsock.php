@@ -3,6 +3,8 @@
 /*
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 13.05.11 12:20 Uhr
+Aufgabe der Datei:
+Daten per Socketverbindung aktualisieren, kann für die automatische Aktualisierung genutzt werden.
 */
 
 //vollständiger pfad zur config notwendig

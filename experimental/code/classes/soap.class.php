@@ -2,6 +2,8 @@
 /*
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 20.04.11 14:05 Uhr
+Aufgabe der Datei:
+Stellt eine für die Aufgabe passende SOAP API zur Verfügung
 */
 
 // basiert auf der API die unter 
@@ -9,10 +11,6 @@ letzte Änderung 20.04.11 14:05 Uhr
 // Author: Christian Seewald, EES GmbH, mail: c.seewald@ees-gmbh.de
 // es waren ein paar änderungen notwendig unter anderem um kompatiblität mit php 5.1 aufwärts herzustellen
 
-
-/*
-stellt die für dieses Problem passende SOAP API zur Verfügung
-*/
 	class SOAPClientApi {
 	
 		var $soapClient;

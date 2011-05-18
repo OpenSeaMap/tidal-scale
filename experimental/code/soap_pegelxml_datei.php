@@ -1,6 +1,8 @@
 <!--
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 20.04.11 18:11 Uhr
+Aufgabe der Datei:
+Aus der SOAP-Response eine XML-Datei erstellen.
 -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <html>

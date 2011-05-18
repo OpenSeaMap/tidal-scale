@@ -2,13 +2,10 @@
 /*
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 06.05.11 16:22 Uhr
+Alle Transformationen in einer Klasse
+aufgeteilt auf verschiedene Funktionen
+Fuer Bessel- und Krassowsky-Ellipsoid immer verschiedene Funktionen benutzt
 */
-
-/*
- * Alle Transformationen in einer Klasse
- * aufgeteilt auf verschiedene Funktionen
- * Fuer Bessel- und Krassowsky-Ellipsoid immer verschiedene Funktionen benutzt
- */
  
 class Transformation {
 	

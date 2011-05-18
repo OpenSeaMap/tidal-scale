@@ -1,6 +1,8 @@
 <!--
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 10.05.11 15:31 Uhr
+Aufgabe der Datei:
+Die Abfrage der Informationen zur Anzeige der Marker auf der Karte werden in einer Datei gespeichert.
 -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <html>

@@ -2,6 +2,8 @@
 /*
 angepasst von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 10.05.11 16:02 Uhr
+Aufgabe der Datei:
+Index Datei von OSM
 */
 	include("../classes/Translation.php");
 ?>

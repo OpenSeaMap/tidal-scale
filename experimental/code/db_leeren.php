@@ -1,6 +1,8 @@
 <!--
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 29.04.11 19:54 Uhr
+Aufgabe der Datei:
+Die erstellten Tabellen werden in der Datenbank geleert.
 -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <html>

@@ -1,6 +1,8 @@
 <!--
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 20.04.11 19:33 Uhr
+Aufgabe der Datei:
+SOAP XML-Datei anzeigen.
 -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <html>

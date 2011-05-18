@@ -1,6 +1,8 @@
 <!--
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 17.04.11 17:41 Uhr
+Aufgabe der Datei:
+Entfernte XML Datei anzeigen.
 -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <html>
