@@ -1,6 +1,8 @@
 <!--
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 17.04.11 17:31 Uhr
+Aufgabe der Datei:
+Die Abfrage der Informationen zur Anzeige der Marker auf der Karte werden in einer Datei gespeichert.
 -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <html>
@@ -32,10 +34,6 @@ $txt = "lat	lon	title	description	icon	iconSize	iconOffset";
 		
 $txt .= "
 ".$resMap->lat."	".$resMap->lon."	".$resMap->pegelname."	".$name." ".$namegebiet."<br><br>Messwert PnP Tendenz<br>".$resMap->messwert." ".$resMap->pnp." ".$tendenz."<br><br>".$resMap->datum." - ".$resMap->uhrzeit."".$daten_fehler."<br><a href=\"http://www.pegelonline.wsv.de/gast/stammdaten?pegelnr=".$resMap->pegelnummer."\">Ganglinie</a><br><br>(click to close)	Ol_icon_blue_example.png	20,20	0,-20";
-/*
-$txt .= "
-".$resMap->lat."	".$resMap->lon."	".$resMap->pegelname."	".$resMap->name." ".$resMap->namegebiet."<br><br>Messwert PnP Tendenz<br>".$resMap->messwert." ".$resMap->pnp." ".$resMap->tendenz."<br><br>Datum - Uhrzeit:<br>".$resMap->datum." - ".$resMap->uhrzeit."<br><br>Fehler vorhanden: ".$resMap->daten_fehler."<br><br><a href=\"http://www.pegelonline.wsv.de/gast/stammdaten?pegelnr=".$resMap->pegelnummer."\">Ganglinie</a><br><br>(click to close)	Ol_icon_blue_example.png	20,20	0,-20";
-*/
 	  }
 
 //datei vorher anlegen und mit chmod rechte geben das geschrieben werden darf	

@@ -1,8 +1,13 @@
 <?php
 /*
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
-letzte Änderung 14.05.11 18:54 Uhr
+letzte Änderung 19.05.11 17:52 Uhr
+Aufgabe der Datei:
+Die Index Datei der Installation / Aktualisierung.
 */
+
+//Ladeanzeige aus php.net doku entnommen
+//http://de3.php.net/manual/de/function.flush.php
 
 //wenn datei existiert wird install durchgeführt sonst aktualisierung
 define('INSTALL', file_exists('./install/steps.inc.php'));
@@ -29,12 +34,29 @@ if (INSTALL) {
 ?>
 <html>
 <head>
-	<title>Installation</title>
+	<title>Installation des Dienstes</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<style type="text/css"><!--
+		.percents {
+		 background: #FFF;
+		 border: 1px solid #CCC;
+		 margin: 1px;
+		 height: 20px;
+		 position:absolute;
+		 width:250px;
+		 //z-index:10;
+		 //left: 100px;
+		 //top: 380px;
+		 text-align: center;
+		 float:left;
+		}
+		-->
+		</style>	
 </head>
 <body>
-	<div>
-		<h3>Installationsschritte</h3>
+<h1>Installation des Dienstes</h1>
+	<div style="float:left;width:25%;">
+		<h3>Installationsschritte:</h3>
 		<ul>
 		<?php
 		//die einzelnen Schritte werden angezeigt
@@ -58,14 +80,15 @@ if (INSTALL) {
 		?>
 		</ul>
 	</div>
-	<div>
+	<div style="float:left;width:75%;">
 		<form method="post" action="index.php?step=<?php echo $nextstep; ?>">
 		<div>
-			<h3><?php echo $steps[$step]; ?></h3>
+			<h3>Aktueller Schritt: <?php echo $steps[$step]; ?></h3>
 			<?php include('install/steps/'.$step.'.php'); ?>
 		</div>
 		</form>
 	</div>
+
 </body>
 </html>
 
@@ -73,20 +96,39 @@ if (INSTALL) {
 //Install Check else könnte man auch mit einem if not install machen
  } else
  { ?>
- 
- <!--
-erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
-letzte Änderung 14.05.11 18:54 Uhr
--->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <html>
     <head>
-        <title>Index </title>
+        <title>Aktualisierung der Daten</title>
+		<style type="text/css"><!--
+		.percents {
+		 background: #FFF;
+		 border: 1px solid #CCC;
+		 margin: 1px;
+		 height: 20px;
+		 position:absolute;
+		 width:250px;
+		 //z-index:10;
+		 //left: 100px;
+		 //top: 380px;
+		 text-align: center;
+		 float:left;
+		}
+		-->
+		</style>
     </head>
     <body>
-<h1>Willkommen</h1>
-<div>Durch den Aufruf werden die Pegel-Daten aktualisiert</div><br>
+<h1>Aktualisierung der Daten</h1>
+<div style="float:left;width:25%;">
+<h3>Schritt:</h3>
+<li><b>Die Pegel-Daten werden aktualisiert</b></li>
+</div>
+<div style="float:left;width:75%;">
+<h3>Fortschritt:</h3>
 <?php
+if (ob_get_level() == 0) {
+    ob_start();
+}
 		//fsock
 		$page = Util::get_document($xmlurl);
         //$xml = simplexml_load_file($xmlurl); //geht nicht da fsocket benutzt
@@ -94,20 +136,31 @@ letzte Änderung 14.05.11 18:54 Uhr
 		$xml = simplexml_load_string($page);
 		if($xml) { //pruefen ob gueltiges xml bzw. wohlgeformt
 		echo 'XML Datei ist Fehlerfrei bzw. Wohlgeformt wird verarbeitet ... ';
+
+flush();
+ob_flush();
+$temp = 0;
 		foreach ($xml->table->gewaesser as $gewaesser) {
             foreach($gewaesser->item as $item) {
+	//$anzahl = intval(sizeof($gewaesser)/10);
+	$anzahl = count($item)/10;
+	$temp = $temp + $anzahl;
+	echo '<div class="percents">' . $temp . 'Daten&nbsp;verarbeitet</div>';
 				Daten::save_update_xml_shell($pegelnummer = $item->pegelnummer, $pegelname = $item->pegelname, $km = $item->km, $messwert = $item->messwert, $datum = $item->datum, $uhrzeit = $item->uhrzeit, $pnp = $item->pnp, $tendenz = $item->tendenz);
             }
 		}
+	echo '<div class="percents">Done.</div>';
         } else {
             echo '<p>Die Datei '. $xmlname .' enhaelt fehler</p>';
         }
 		echo "fertig";
+ob_end_flush();
 		?>
-	<br><br>
+</div>
     </body>
 </html>
   
  <?php
+ //ende else
  }
   ?>

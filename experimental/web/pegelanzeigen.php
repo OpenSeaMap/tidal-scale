@@ -2,6 +2,8 @@
 /*
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 10.05.11 17:31 Uhr
+Aufgabe der Datei:
+Abfrage der Informationen zur Anzeige der Marker auf der Karte.
 */
 header("Content-type: text/plain; charset=UTF-8");
 include('config.inc.php');

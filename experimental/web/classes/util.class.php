@@ -2,11 +2,9 @@
 /*
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 11.05.11 12:15 Uhr
-*/
-
-/*
 alle wichtigen Funktionen in einer hilfsklasse zusammengefasst
 */
+
 class Util {
 	
 	/*

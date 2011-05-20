@@ -2,6 +2,8 @@
 /*
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 15.05.11 15:02 Uhr
+Aufgabe der Datei:
+Sellt die MySQL Funktionalität bereit.
 */
 
 class MySQL {

@@ -5,6 +5,7 @@ Es werden die notwendigen Transformationen fuer den Bessel-Ellipsoid durchgefueh
 <?php
 Daten::set_coord_bessel();
  ?>
+ <?=$db->getQueryCount()?> Datenbankabfragen in <?=substr($db->getQueryTimeSum(),0,6)?> Sekunden. 
 </p>
 <p>Klicken Sie auf &quot;Weiter&quot; um fortzufahren</p>
 </div>

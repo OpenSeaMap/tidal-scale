@@ -2,8 +2,11 @@
 <p><b>SOAP XML verarbeiten</b></p>
 <p>
 Nun werden die Daten aus der XML-Datei in MySQL eingefuegt:<br><br>
-<b>Bitte ans Ende der Seite Scrollen</b><br><br>
+<!--<b>Bitte ans Ende der Seite Scrollen</b><br><br>-->
 <?php
+if (ob_get_level() == 0) {
+    ob_start();
+}
 	//selbst erzeugt
     if(file_exists($soapname)) {
         $xml = simplexml_load_file($soapname);
@@ -12,10 +15,14 @@ Nun werden die Daten aus der XML-Datei in MySQL eingefuegt:<br><br>
 		//ins logfile schreiben
 		$msg = "XML Datei ist Fehlerfrei bzw. Wohlgeformt ausgabe ...";
 		Log::write(LOG_SOAP, $msg);
+flush();
+ob_flush();
+$temp = 0;
 		foreach ($xml->table->gewaesser as $gewaesser) {
-		echo '<br><br>';
+		//echo '<br><br>';
             foreach($gewaesser->item as $item) {
-            ?>
+            /*
+			?>
         <table>
 			<tr>
                 <td>namegebiet:</td>
@@ -83,17 +90,21 @@ Nun werden die Daten aus der XML-Datei in MySQL eingefuegt:<br><br>
             </tr>
         </table>
 <?php
+*/
+	$temp = $temp + 1;
+echo '<div class="percents">' . $temp . ' Daten&nbsp;verarbeitet</div>';
 //einzelne werte an klasse übergeben
 Daten::save_update_soap($pegelnummer = $item->pegelnummer, $pegelname = $item->pegelname, $km = $item->km, $messwert = $item->messwert, $datum = $item->datum, $uhrzeit = $item->uhrzeit, $pnp = $item->pnp, $tendenz = $item->tendenz, $namegebiet = $item->namegebiet, $name = $item->name, $Rechtswert_GK = $item->rechtswert, $Hochwert_GK = $item->hochwert, $streifenzone = $item->streifenzone, $bezugssystem = $item->bezugssystem, $ellipsoid = $item->ellipsoid, $epsgCode = $item->epsgCode);
-       
             }
 		}
+		echo '<div class="percents">Done.</div>';
 		} else {
             echo '<p>Die Datei '. $soapname .' enhaelt fehler</p>';
 			//ins logfile schreiben
 			$msg = "Die Datei '. $soapname .' enhaelt fehler";
 			Log::write(LOG_SOAP, $msg);
         }
+ob_end_flush();
     } else {
 		echo '<p>Die Datei '. $soapname .' ist nicht vorhanden</p>';
 		//ins logfile schreiben

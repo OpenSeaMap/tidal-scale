@@ -1,17 +1,11 @@
 <?php
-//test ausgaben entfernen
-//echos entfernen
-
-
 /*
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 06.05.11 16:25 Uhr
+alle wichtigen Funktionen die mit der Datenspeicherung in MySQL etwas zu tun haben,
+in einer Klasse zusammengefasst
 */
 
-/*
-* alle wichtigen Funktionen die mit der Datenspeicherung in MySQL etwas zu tun haben,
-* in einer Klasse zusammengefasst
-*/
 class Daten {
 	
     function __construct() {
@@ -269,7 +263,7 @@ public static function set_coord_bessel() {
 	//geeignete Anzahl der Abfrage wählen, damit die Berechnungen in unter 30 sekunden erfolgen können, zwischen 400 und 600 ist ein guter wert
 	  $result5Pegel = $db->qry(" SELECT pegelnummer,Rechtswert_GK,Hochwert_GK,lat,lon,streifenzone,ellipsoid,daten_fehler,pnp FROM ".TABLE_PEGEL2." WHERE `lat` = '' AND `lon` = '' AND `Rechtswert_GK` != '0.00' AND `Hochwert_GK` != '0.00' AND `ellipsoid` = 'Bessel 1841' ORDER BY `pegelnummer` DESC LIMIT 0, 450 ");
 	  if ($result5Pegel){
-		echo 'erfolg verbindung und auswahl';
+		//echo 'erfolg verbindung und auswahl';
 		//ins logfile schreiben
 		$msg = "erfolg verbindung und auswahl";
 		Log::write(LOG_OTHER, $msg);
@@ -296,20 +290,20 @@ public static function set_coord_bessel() {
 		
 		//transformation mit formel
 		$bvar = Transformation::GK_geo_bessel($hw,$rw,$avar[1]);
-		echo '<br><br>l und b<br>';
-		var_dump($bvar);
+		//echo '<br><br>l und b<br>';
+		//var_dump($bvar);
 		
 		$cvar = Transformation::geo_bessel_kart($bvar[0],$bvar[1],$pnp);
-		echo '<br><br>kart<br>';
-		var_dump($cvar);
+		//echo '<br><br>kart<br>';
+		//var_dump($cvar);
 		
 		$dvar = Transformation::rotation_translation_bessel_wgs84($cvar[0],$cvar[1],$cvar[2]);
-		echo '<br><br>nach rot und trans<br>';
-		var_dump($dvar);
+		//echo '<br><br>nach rot und trans<br>';
+		//var_dump($dvar);
 		
 		$evar = Transformation::kart_wgs84_geo($dvar[0],$dvar[1],$dvar[2]);
-		echo '<br><br>nach umwandlung<br>';
-		var_dump($evar);
+		//echo '<br><br>nach umwandlung<br>';
+		//var_dump($evar);
 		
 		//wichtig ist php hat nur einen return wert dieser ist hier ein array also passend setzten
 		$lat = $evar[0];
@@ -322,8 +316,8 @@ public static function set_coord_bessel() {
 	WHERE pegelnummer='$pegelnummer' ");
 
 	if ($result){
-	echo '<br><br>';
-	echo 'erfolg update koordinaten';
+	//echo '<br><br>';
+	//echo 'erfolg update koordinaten';
 	//ins logfile schreiben
 	$msg = "erfolg update koordinaten";
 	Log::write(LOG_OTHER, $msg);
@@ -348,7 +342,7 @@ public static function set_coord_krass() {
 	//geeignete Anzahl der Abfrage wählen, damit die Berechnungen in unter 30 sekunden erfolgen können, zwischen 400 und 600 ist ein guter wert
 	  $result5Pegel = $db->qry(" SELECT pegelnummer,Rechtswert_GK,Hochwert_GK,lat,lon,streifenzone,ellipsoid,daten_fehler,pnp FROM ".TABLE_PEGEL2." WHERE `lat` = '' AND `lon` = '' AND `Rechtswert_GK` != '0.00' AND `Hochwert_GK` != '0.00' AND `ellipsoid` = 'Krassovski' ORDER BY `pegelnummer` DESC LIMIT 0, 450 ");
 	  if ($result5Pegel){
-		echo 'erfolg verbindung und auswahl';
+		//echo 'erfolg verbindung und auswahl';
 		//ins logfile schreiben
 		$msg = "erfolg verbindung und auswahl";
 		Log::write(LOG_OTHER, $msg);
@@ -375,20 +369,20 @@ public static function set_coord_krass() {
 		
 		//transformation mit formel
 		$bvar = Transformation::GK_geo_krass($hw,$rw,$avar[1]);
-		echo '<br><br>l und b<br>';
-		var_dump($bvar);
+		//echo '<br><br>l und b<br>';
+		//var_dump($bvar);
 		
 		$cvar = Transformation::geo_krass_kart($bvar[0],$bvar[1],$pnp);
-		echo '<br><br>kart<br>';
-		var_dump($cvar);
+		//echo '<br><br>kart<br>';
+		//var_dump($cvar);
 		
 		$dvar = Transformation::rotation_translation_krass_wgs84($cvar[0],$cvar[1],$cvar[2]);
-		echo '<br><br>nach rot und trans<br>';
-		var_dump($dvar);
+		//echo '<br><br>nach rot und trans<br>';
+		//var_dump($dvar);
 		
 		$evar = Transformation::kart_wgs84_geo($dvar[0],$dvar[1],$dvar[2]);
-		echo '<br><br>nach umwandlung<br>';
-		var_dump($evar);
+		//echo '<br><br>nach umwandlung<br>';
+		//var_dump($evar);
 		
 		//wichtig ist php hat nur einen return wert dieser ist hier ein array also passend setzten
 		$lat = $evar[0];
@@ -401,8 +395,8 @@ public static function set_coord_krass() {
 	WHERE pegelnummer='$pegelnummer' ");
 
 	if ($result){
-	echo '<br><br>';
-	echo 'erfolg update koordinaten';
+	//echo '<br><br>';
+	//echo 'erfolg update koordinaten';
 	//ins logfile schreiben
 	$msg = "erfolg update koordinaten";
 	Log::write(LOG_OTHER, $msg);
@@ -553,10 +547,12 @@ public static function save_update_soap($pegelnummer, $pegelname, $km, $messwert
 		
 		if ($result)
 		{
+		/*
 		echo 'update: daten erfolg';
 			//ins logfile schreiben
 			$msg = "update: daten erfolg";
 			Log::write(LOG_OTHER, $msg);
+		*/
 		}
 		else
 		{

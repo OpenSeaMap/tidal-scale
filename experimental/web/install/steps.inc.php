@@ -2,6 +2,9 @@
 /*
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 13.05.11 18:54 Uhr
+Aufgabe der Datei:
+Enthält die einzelnen für die Installation notwendigen Schritte,
+zu denen entsprechende Dateien im Ordner Steps vorhanden sein müssen.
 */
 $steps = array(
 	1 => 'Willkommen',

@@ -470,9 +470,9 @@ class Transformation {
 
 	    // Rotierte Vektoren
 		//schon ausgerechnet Werte aus [BKG11b] sind noch in Radianten umzurechnen
-		//rotation X-axis +0.202"
-		//rotation Y-axis +0.045"
-		//rotation Z-axis -2.455"
+		//rotation X-axis +0.202" -> 0.0000119021759
+		//rotation Y-axis +0.045" -> 0.000000218166156
+		//rotation Z-axis -2.455" -> -0.0000009793236
 		//jeweils mal PI durch 180 durch 3600
 		
 		$x2 = ($x1 * 1) + ($y1 * 0.0000119021759) + ($z1 * 0.000000218166156);

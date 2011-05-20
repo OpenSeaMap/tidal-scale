@@ -1,7 +1,7 @@
 <div>
 <p><b>Willkommen zur Installation</b></p>
 <p>
-Willkommen bei der Installation bevor Sie fortfahren, stellen Sie bitte folgendes sicher:<br><br>
+Bevor Sie mit der Installation fortfahren, stellen Sie bitte folgendes sicher:<br><br>
 <b>In der config.inc.php muessen die notwendigen Datenbank Einstellungen vorgenommen werden, im Einzelnen:</b><br>
 define('MYSQL_HOST', 'localhost'); <br>
 define('MYSQL_USER', 'db_user');<br>
