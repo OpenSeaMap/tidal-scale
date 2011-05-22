@@ -48,7 +48,8 @@ function makeTidalScaleRequest(params) {
 		url += encodeURIComponent(name) + "=" + encodeURIComponent(params[name]);
 	}
 //bitte anpassen
-	var TidalScaleUrl="http://URL.de/inhalt_von_web/getTidalTest.php"+url;
+	var TidalScaleUrl="http://osm.soft-gmbh.de/anzeige/getTidalTest.php"+url;
+//	var TidalScaleUrl="http://URL.de/inhalt_von_web/getTidalTest.php"+url;
 //bitte anpassen
 
 	var script = document.createElement("script");
@@ -66,7 +67,7 @@ function putTidalScaleMarker(id, lon, lat, tidal_name, name, namegebiet, messwer
 			popupText += "<br>Messwert Tendenz PnP<br>" + messwert + " " + tendenz + " " + pnp + "<br>";
 			popupText += "<br>" + datum + " - " + uhrzeit + "<br>";
 			popupText += "<br>" + daten_fehler + "<br>";
-			popupText += "<br><a href='http://www.pegelonline.wsv.de/gast/stammdaten?pegelnr=" + id + "' target='blank'>Gangeline</a>";
+			popupText += "<br><a href='http://www.pegelonline.wsv.de/gast/stammdaten?pegelnr=" + id + "' target='blank'>Ganglinie</a>";
 		var TidalScale = {id: id, name: tidal_name, lat: lat, lon: lon, feature: null};
 		TidalScale.feature = createTidalScaleFeature(lon2x(lon), lat2y(lat), popupText, 1);
 		arrayTidalScales.push(TidalScale);
@@ -86,9 +87,9 @@ function putTidalScaleMarker(id, lon, lat, tidal_name, name, namegebiet, messwer
 			popupText += "<tr><td colspan='3'></td></tr>";	
 			popupText += "<tr><td colspan='3'>" + daten_fehler + "</td></tr>";
 			popupText += "<tr><td colspan='3'></td></tr>";
-			popupText += "<tr><td colspan='3'><a href='http://www.pegelonline.wsv.de/gast/stammdaten?pegelnr=" + id + "' target='blank'>Gangeline</a></td></tr>";
+			popupText += "<tr><td colspan='3'><a href='http://www.pegelonline.wsv.de/gast/stammdaten?pegelnr=" + id + "' target='blank'>Ganglinie</a></td></tr>";
 			popupText += "<tr><td colspan='3'></td></tr>";
-			popupText += "<tr><td colspan='3'><a href='http://wiki.openstreetmap.org/wiki/DE:OpenSeaMap' target='blank'>Wiki-Hilfe</a></td></tr></table>";
+			popupText += "<tr><td colspan='3'><a href='http://wiki.openseamap.org/wiki/De:Pegel' target='blank'>Wiki-Hilfe</a></td></tr></table>";
 		var TidalScale = {id: id, name: tidal_name, lat: lat, lon: lon, feature: null};
 		TidalScale.feature = createTidalScaleFeature(lon2x(lon), lat2y(lat), popupText, 1);
 		arrayTidalScales.push(TidalScale);

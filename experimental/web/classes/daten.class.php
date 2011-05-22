@@ -319,7 +319,7 @@ public static function set_coord_bessel() {
 	//echo '<br><br>';
 	//echo 'erfolg update koordinaten';
 	//ins logfile schreiben
-	$msg = "erfolg update koordinaten";
+	$msg = "erfolg update der koordinaten von pegelnummer '. $pegelnummer .'";
 	Log::write(LOG_OTHER, $msg);
 	}
 	else {
@@ -398,7 +398,7 @@ public static function set_coord_krass() {
 	//echo '<br><br>';
 	//echo 'erfolg update koordinaten';
 	//ins logfile schreiben
-	$msg = "erfolg update koordinaten";
+	$msg = "erfolg update der koordinaten von pegelnummer '. $pegelnummer .'";
 	Log::write(LOG_OTHER, $msg);
 	}
 	else {

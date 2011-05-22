@@ -40,7 +40,7 @@ else {
   $bottom = null; 
 }
 
-	$resultMap = $db->qry(" SELECT pegelnummer,pegelname,km,messwert,datum,uhrzeit,pnp,tendenz,namegebiet,name,daten_fehler,lat,lon FROM ".TABLE_PEGEL3." WHERE lat !='' AND lon !='' AND $l<lon AND lon<$r AND $b<lat AND lat<$t ORDER BY `pegelnummer` LIMIT 100 ");
+	$resultMap = $db->qry(" SELECT pegelnummer,pegelname,km,messwert,datum,uhrzeit,pnp,tendenz,namegebiet,name,daten_fehler,lat,lon FROM ".TABLE_PEGEL2." WHERE lat !='' AND lon !='' AND $l<lon AND lon<$r AND $b<lat AND lat<$t ORDER BY `pegelnummer` LIMIT 100 ");
 	  while($resMap = mysql_fetch_object($resultMap)) {
 		  Map::write_line_osm($resMap);
 		//$daten_fehler = Util::show_daten_fehler_osm($resMap->daten_fehler);
