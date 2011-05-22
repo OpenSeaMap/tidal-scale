@@ -48,8 +48,7 @@ function makeTidalScaleRequest(params) {
 		url += encodeURIComponent(name) + "=" + encodeURIComponent(params[name]);
 	}
 //bitte anpassen
-	var TidalScaleUrl="http://osm.soft-gmbh.de/anzeige/getTidalTest.php"+url;
-//	var TidalScaleUrl="http://URL.de/inhalt_von_web/getTidalTest.php"+url;
+	var TidalScaleUrl="http://URL.de/inhalt_von_web/getTidalTest.php"+url;
 //bitte anpassen
 
 	var script = document.createElement("script");
