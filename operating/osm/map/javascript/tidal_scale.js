@@ -22,7 +22,7 @@
  
 /*
 angepasst von Tim Reinartz im Rahmen der Bachelor-Thesis
-letzte Änderung 11.05.11 12:02 Uhr
+letzte Änderung 24.05.11 12:02 Uhr
 Aufgabe der Datei:
 Stellt die Marker auf OSM dar.
 */
@@ -88,7 +88,10 @@ function putTidalScaleMarker(id, lon, lat, tidal_name, name, namegebiet, messwer
 			popupText += "<tr><td colspan='3'></td></tr>";
 			popupText += "<tr><td colspan='3'><a href='http://www.pegelonline.wsv.de/gast/stammdaten?pegelnr=" + id + "' target='blank'>Ganglinie</a></td></tr>";
 			popupText += "<tr><td colspan='3'></td></tr>";
-			popupText += "<tr><td colspan='3'><a href='http://wiki.openseamap.org/wiki/De:Pegel' target='blank'>Wiki-Hilfe</a></td></tr></table>";
+			popupText += "<tr><td colspan='3'><a href='http://wiki.openseamap.org/wiki/De:Pegel' target='blank'>Wiki-Hilfe</a></td></tr>";
+			popupText += "<tr><td colspan='3'></td></tr>";
+			popupText += "<tr><td colspan='3'></td></tr>";
+			popupText += "<tr><td colspan='3'><a href='http://openportguide.org/cgi-bin/weather/weather.pl/weather.png?var=meteogram&nx=614&ny=750&lat=" + lat + "&lon=" + lon + "&lang=de&unit=metric&label=" + tidal_name + "' target='blank'>Meteogramm</a></td></tr></table>";
 		var TidalScale = {id: id, name: tidal_name, lat: lat, lon: lon, feature: null};
 		TidalScale.feature = createTidalScaleFeature(lon2x(lon), lat2y(lat), popupText, 1);
 		arrayTidalScales.push(TidalScale);
