@@ -1,8 +1,9 @@
 <?php
 /*
-erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
-letzte Änderung 11.05.11 12:15 Uhr
-erzeugt die notwendigen Marker auf der Karte
+Created by Tim Reinartz as part of the Bachelor Thesis
+last update 25.05.11 12:25 Uhr
+The object of the file:
+generates the necessary markers on the map
 */
 
 class Map {
@@ -11,8 +12,8 @@ class Map {
     }
     
     /*
-     * Schreibt den notwendigen Header
-	 * kann zusammen mit write_line in fast jeder Karte die OpenLayers unterstützt genutzt werden
+     * Writes the necessary headers
+	 * may be used with write_line supported in almost every map using OpenLayers
      */
     public static function write_header()
 	{
@@ -21,11 +22,11 @@ class Map {
 	}
 	
     /*
-     * Schreibt einen Eintrag in einer Zeile
-	 * kann zusammen mit write_header in fast jeder Karte die OpenLayers unterstützt genutzt werden
+     * Writes an entry in a row
+	 * may be used with write_line supported in almost every map using OpenLayers
 	 * @param $mysqlresult
      */
-	//mit $resMap aufrufen
+	//call with $ resMap
 	public static function write_line($row)
 	{
 	//         lat  lon
@@ -46,11 +47,11 @@ class Map {
 	print("<nobr>".$row->pegelname."</nobr>\t");
 	
 	
-	//"Problem mit UTF-8 umgehen"
+	//"deal with UTF-8"
 	$name = Util::getCleanString($row->name);
 	$namegebiet = Util::getCleanString($row->namegebiet);
 	
-	//umwandlungen fuer die Anzeige
+	//conversion for the display
 	$name = Util::convertUpperString($name);
 	$namegebiet = Util::convertUpperString($namegebiet);
 	
@@ -59,7 +60,6 @@ class Map {
 
 	//  description
 	print("<nobr>".$name.", ".$namegebiet."<br><br>Messwert&nbsp;Tendenz PnP<br>".$row->messwert." ".$tendenz." ".$row->pnp."<br><br>".$row->datum."  -  ".$row->uhrzeit."<br>".$daten_fehler."<br><a href=\"http://www.pegelonline.wsv.de/gast/stammdaten?pegelnr=".$row->pegelnummer."\">Ganglinie</a></nobr><br/>");
-	//print("<nobr>".$name." ".$namegebiet."<br><br>Messwert PnP Tendenz<br>".$row->messwert." ".$row->pnp." ".$row->tendenz."<br><br>Datum - Uhrzeit:<br>".$row->datum." - ".$row->uhrzeit."<br><br>Fehler vorhanden: ".$row->daten_fehler."<br><a href=\"http://www.pegelonline.wsv.de/gast/stammdaten?pegelnr=".$row->pegelnummer."\">Ganglinie</a></nobr><br/>");
 
 	//popupSize
 	 print("\t");
@@ -68,26 +68,26 @@ class Map {
 	}
 	
     /*
-     * Schreibt einen Eintrag in einer Zeile
-	 * kann so nur auf OpenSeaMap genutzt werden
+     * Writes an entry in a row
+	 * can only be used on OpenSeaMap
 	 * @param $mysqlresult
      */
-	//mit $resMap aufrufen
+	//call with $ resMap
 	public static function write_line_osm($row)
 	{
 	
-	//"Problem mit UTF-8 umgehen"
+	//"deal with UTF-8"
 	$name = Util::getCleanString_osm($row->name);
 	$namegebiet = Util::getCleanString_osm($row->namegebiet);
 	
-	//umwandlungen fuer die Anzeige muss umgeschrieben werden
+	//conversion for the display had to be rewritten
 	$name = Util::convertUpperString($name);
 	$namegebiet = Util::convertUpperString($namegebiet);
 	
 	$tendenz = Util::convertArrow_osm($row->tendenz);
 	$daten_fehler = Util::show_daten_fehler_osm($row->daten_fehler);
 
-	//zeile
+	//row
 	echo "putTidalScaleMarker($row->pegelnummer, $row->lon, $row->lat, '".addslashes($row->pegelname)."', '$name', '$namegebiet', '$row->messwert', '$tendenz', '$row->pnp', '$row->datum', '$row->uhrzeit', '$daten_fehler');\n";
 	}
 	

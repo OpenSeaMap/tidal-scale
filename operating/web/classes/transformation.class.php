@@ -29,7 +29,7 @@ class Transformation {
 		$PI = pi();
 		$rho = 180 / $PI;
 		
-		// Konstanten für Essel-Ellipsoid
+		// Konstanten für Bessel-Ellipsoid
 		$a = 6377397.155;
 		$b = 6356078.963;
 		
@@ -534,7 +534,7 @@ class Transformation {
     }
 	
 		/*
-		* wandelt die kartesiche Koordinaten die mit rotation_translation umgewandelt wurden
+		* wandelt die kartesischen Koordinaten die mit rotation_translation umgewandelt wurden
 		* in breite und laenge auf WGS84 um
 		* [GJ11, S.112]
 		* @param $x, $y und $z

@@ -13,7 +13,7 @@ class Daten {
     }	
 
     /*
-     * vergleich der verscheidenen Koordinaten-Transformationen
+     * vergleich der verschiedenen Koordinaten-Transformationen
 	 * hat für die eigentliche Anwendung keine Funktion
 	 * zum testen gedacht
      */

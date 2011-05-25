@@ -1,12 +1,12 @@
 <?php
 /*
-erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
-letzte Änderung 18.04.11 16:02 Uhr
-Aufgabe der Datei:
-Fehler- und Erfolgsmeldungen in einer Datei speichern.
+Created by Tim Reinartz as part of the Bachelor Thesis
+last update 25.05.11 12:25 Uhr
+The object of the file:
+Save error and success messages to a file.
 */
 
-//vordefinierte logdateien
+//predefined log files
 define('LOG_SQL', PATH_LOG.'sql.log');
 define('LOG_XML', PATH_LOG.'xml.log');
 define('LOG_SOAP', PATH_LOG.'soap.log');
@@ -18,7 +18,7 @@ class Log {
     }
     
     /*
-     * Schreibt einen Eintrag in die entsprechende Log Datei
+     * Writes an entry in the appropriate log file
 	 * @param $logFile
 	 * @param $msg
      */

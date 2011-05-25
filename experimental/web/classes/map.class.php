@@ -2,7 +2,7 @@
 /*
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 11.05.11 12:15 Uhr
-erzeugt die notwenigen Marker auf der Karte
+erzeugt die notwendigen Marker auf der Karte
 */
 
 class Map {

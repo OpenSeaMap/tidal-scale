@@ -1,0 +1,20 @@
+Übersetzung		translation
+
+pegelnummer		tide scale number
+pegelname		tide scale name
+km			km
+messwert		measuring value
+datum			date
+uhrzeit			time
+pnp			gauge zero / gauge datum
+tendenz			tendency
+namegebiet		area name
+name			name
+rechtswert		easting
+hochwert		northing
+streifenzone		"strip zone"
+bezugssystem		reference system
+ellipsoid		ellipsoid
+epsgCode		epsgCode
+daten_fehler		data error
+pegelstände		water levels

@@ -3,7 +3,7 @@
 erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
 letzte Änderung 15.05.11 15:02 Uhr
 Aufgabe der Datei:
-Sellt die MySQL Funktionalität bereit.
+Stellt die MySQL Funktionalität bereit.
 */
 
 class MySQL {
@@ -45,7 +45,7 @@ class MySQL {
 	}
 	
     /*
-     * Führt ein sql query aus, wenn diese anfange falsch ist wird eine fehlermeldung ausgegeben
+     * Führt ein sql query aus, wenn diese Anfrage falsch ist wird eine Fehlermeldung ausgegeben
 	 * und diese in ein log File geschrieben
 	 * @param qry - der auszuführende string
 	 * @param debug = false - wenn TRUE, wird der query string angezeigt(echo)

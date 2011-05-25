@@ -1,10 +1,11 @@
 <?php
 /*
-erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
-letzte Änderung 06.05.11 16:22 Uhr
-Alle Transformationen in einer Klasse
-aufgeteilt auf verschiedene Funktionen
-Fuer Bessel- und Krassowsky-Ellipsoid immer verschiedene Funktionen benutzt
+Created by Tim Reinartz as part of the Bachelor Thesis
+last update 25.05.11 12:25 Uhr
+The object of the file:
+All transformations in a class
+allocated to different functions
+For Bessel-ellipsoid and Krassowsky always different functions were used
 */
  
 class Transformation {
@@ -15,83 +16,82 @@ class Transformation {
     }
 	
 	/*
-	 * Diese Formeln bzw. die Umrechung basiert auf [Gro76] und [HKL94]
-     * transformiert die GK-Koordinaten in lat und lon
-	 * @param $hoch und $rechts (richtig formatiert, dies ist immer der fall, da die Daten passend in der DB abgelegt werden)
-	 * @return $lat und $lon
+	 * These formulas based on [Gro76] and [HKL94]
+     * transforms GK coordinates in lat and lon
+	 * @param $hoch and $rechts (properly formatted, this is always the case, because the data is stored matching in the database)
+	 * @return $lat and $lon
      */
     public static function GK_geo($hoch,$rechts) {
-		//Umwandlung nicht notwendig 
+		//Conversion is not necessary
 		$hw = $hoch;
 		$rw = $rechts;
 	
-		//mathematische Konstanten
+		//mathematical constants
 		$PI = pi();
 		$rho = 180 / $PI;
 		
-		// Konstanten für Bessel-Ellipsoid
+		// constants for Bessel-Ellipsoid
 		$a = 6377397.155;
 		$b = 6356078.963;
 		
-		//2. numerische Exzentrizitaet
+		//"2. numerische Exzentrizitaet"
 		//$e_strich_2 = 0.00671921879;
-		//oder besser wird berechnet durch 
+		//better calculated by
 		$e_strich_2 = (($a * $a) - ($b * $b)) / ($b * $b);
 		
-		//Polkrümmungshalbmesser / Polkrümmungsradius
+		//"Polkrümmungshalbmesser / Polkrümmungsradius"
 		//$c = 6398786.849;
-		//oder besser wird berechnet durch 
+		//better calculated by
 		$c = ($a * $a)/$b;
 		
-		//erste Stelle vom rechtswert fuer die Bestimmung der streifenzone nehmen
+		//first number by the "rechtswert"(easting) for the determination of the "strip zone"
 		$zone = substr($rw, 0, 1);
 		//int cast
 		$zone = intval($zone);
 		
-		//die Umwandlung
+		//transformation
 		$rm = $rw - $zone * 1000000 - 500000;
 		$bI = $hw / 10000855.7646;
 		$bII = $bI * $bI;
-		//Konstanten berechnet und eingesetzt
+		//Constants were calculated and used
 		$bf = 325632.08677 * $bI * ((((((0.00000562025 * $bII - 0.00004363980) * $bII + 0.00022976983) * $bII - 0.00113566119) * $bII + 0.00424914906) * $bII - 0.00831729565) * $bII + 1);
 		$bf = $bf / 3600 / $rho;
-		//Umformungen die fuer breite und laenge benoetigt werden
+		//conversion for lat and lon
 		$cos_bf = cos(deg2rad($bf));		
 		$g2 = $e_strich_2 * ($cos_bf * $cos_bf);
 		$g1 = $c / (sqrt(1 + $g2));
 		$tan_bf = tan(deg2rad($bf));
 		$fa = $rm / $g1;
 		
-		//breite
+		//lat
 		$breite = $bf - ($fa * $fa * $tan_bf * (1 + $g2) / 2) + ($fa * $fa * $fa * $fa * $tan_bf * (5 + 3 * $tan_bf * $tan_bf + 6 * $g2 - 6 * $g2 * $tan_bf * $tan_bf) / 24);
 		$breite = $breite * $rho; 
-		//laenge
+		//lon
 		$laenge = $fa - ($fa * $fa * $fa * (1 + 2 * $tan_bf * $tan_bf + $g2) / 6) + ($fa * $fa * $fa * $fa * $fa * (1 + 28 * $tan_bf * $tan_bf + 24 * $tan_bf * $tan_bf * $tan_bf * $tan_bf) / 120);
 		$laenge = $laenge * $rho / $cos_bf + $zone * 3;
 
-		//lat und lon die Ergebnisse zuweisen
+		//lat and lon
 		$lat = $breite;
 		$lon = $laenge;
 
-	//PHP hat immer nur einen Rückgabewert, deswegen geht dies nicht
+	//PHP has only a return value, so this does not work
 	//return $lat,$lon; !!!
-	//ein array ist aber nur eine Rückgabe
-	//deswegen geht folgendes
+	//an array is just one return value, this works
 	return array($lat, $lon);
 		
     }
 
 		/*
-		* GK-Koordinaten mithilfe von Konstanten transformieren
-		* zum Testen geschrieben
-		* @param $hoch und $rechts (richtig formatiert, dies ist immer der fall, da die Daten passend in der DB abgelegt werden)
-		* @return $lat und $lon
+		* transforms GK coordinates in lat and lon with constants
+		* designed to test
+		* @param $hoch and $rechts (properly formatted, this is always the case, because the data is stored matching in the database)
+		* @return $lat and $lon
 		*/
 		public static function GK_geo_6point_3eck($hoch,$rechts) {
 		
 		/*
 		Punkte bilden ein Dreieck
-		Breite und Laenge berechnet mit [BKG11]
+		Breite and Laenge berechnet mit [BKG11]
 		Rechts		Hoch
 		Laenge 		Breite
 		KONSTANZ
@@ -124,7 +124,7 @@ class Transformation {
 		0.507003207607
 		*/
 		
-		//Konstanten
+		//constants
 		$a1 = 0.00000898602650489;
 		$b1 = -0.000000000611562607167;
 		$c1 = 0.214132498492;
@@ -142,16 +142,16 @@ class Transformation {
 	}
 
 		/*
-		* GK-Koordinaten mithilfe von Konstanten transformieren
-		* zum Testen geschrieben
-		* @param $hoch und $rechts (richtig formatiert, dies ist immer der fall, da die Daten passend in der DB abgelegt werden)
-		* @return $lat und $lon
+		* transforms GK coordinates in lat and lon with constants
+		* designed to test
+		* @param $hoch and $rechts (properly formatted, this is always the case, because the data is stored matching in the database)
+		* @return $lat and $lon
 		*/
 	public static function GK_geo_6point($hoch,$rechts) {
 	
 		/*
 		Punkte willkührlich gewählt
-		Breite und Laenge berechnet mit [BKG11]
+		Breite and Laenge berechnet mit [BKG11]
 		Rechts		Hoch
 		Laenge 		Breite
 		KÖLN
@@ -184,7 +184,7 @@ class Transformation {
 		-41.138125
 		*/
 	
-		//Konstanten
+		//constants
 		$a1 = 0.0000089571933;
 		$b1 = 0.00000015506242;
 		$c1 = -0.16132672;
@@ -202,20 +202,22 @@ class Transformation {
 	}
 	
 	   /*
-		* GK koordinaten in Geo. Koordinaten [GJ11, S.114] hier für Bessel-Ellipsoid
-		* @param $hoch und $rechts (richtig formatiert, dies ist immer der fall, da die Daten passend in der DB abgelegt werden) $laenge wird passend ausgelesen
-		* @return $lat und $lon
+	   	* These formulas based on [GJ11, S.114]
+		* transforms GK coordinates in geo. coorinates
+		* Bessel-Ellipsoid
+		* @param $hoch and $rechts (properly formatted, this is always the case, because the data is stored matching in the database)
+		* @return $lat and $lon
 		*/
 	public static function GK_geo_bessel($hoch,$rechts,$laenge) {
-		//Umwandlung nicht notwendig
+		//Conversion is not necessary
 		$hw = $hoch;
 		$rw = $rechts;
 	
-		//mathematische Konstanten
+		//mathematical constants
 		$PI = pi();
 		$rho = 180 / $PI;
 		
-		//fuer Bessel-Ellipsoid
+		//Bessel-Ellipsoid
 		$e0 = 111120.619607;
 		$f2 = 0.143885364;
 		$f4 = 0.000210771;
@@ -224,18 +226,18 @@ class Transformation {
 		$a = 6377397.155;
 		$b = 6356078.963;
 		
-		//aus Streifenzonen laengen machen
+		//"strip zone"
 		$l0 = $laenge*3;
 		
-		//wichtige Terme
+		//important terms
 		$y = $rw - ((($l0/3)+0.5) * pow(10, 6));
-		//Polkrümmungshalbmesser
+		//"Polkrümmungshalbmesser"
 		$c = ($a * $a)/$b; 
-		//2. numerische Exzentrizitaet
+		//"2. numerische Exzentrizitaet"
 		$e_strich_2 = (($a * $a)-($b * $b))/($b * $b);
 		$sigma = ($hw/$e0);
 		
-		//Umformungen die fuer breite und laenge benoetigt werden
+		//Forming needed for the latitude and longitude
 		$sigma2 = $sigma * 2;
 		$sigma4 = $sigma * 4;
 		$sigma6 = $sigma * 6;
@@ -265,39 +267,40 @@ class Transformation {
 		$l_hilf3 = (1 - ($y_strich_2/6) * ($v2+(2*$t2) - ($y_strich_2 * $l_hilf2)));
 		$l = $l_hilf1  * $l_hilf3;
 
-		//lat und lon die Ergebnisse zuweisen
+		//lat and lon
 		$lat = $breite;
 		$lon = abs($l+$l0);
 		
-		//Werte sollten fuer laenge zwischen 5 und 16 liegen fuer die breite zwischen 46 und 56
+		//Werte sollten fuer laenge zwischen 5 and 16 liegen fuer die breite zwischen 46 and 56
 		//Ueberpruefung koennte eingebaut werden,
 		//allerdings stammen die GK-Koordinaten so direkt von der Budesanstalt fuer Wasserbau,
 		//somit ist eine Ueberpruefung nicht notwendig, da an den Werten nichts geaendert werden kann
 
-	//PHP hat immer nur einen Rückgabewert, deswegen geht dies nicht
+	//PHP has only a return value, so this does not work
 	//return $lat,$lon; !!!
-	//ein array ist aber nur eine Rückgabe
-	//deswegen geht folgendes
+	//an array is just one return value, this works
 	return array($lat, $lon);
 		
     }
 	
 	
 	   /*
-		* GK-Koordinaten in Geo. Koordinaten [GJ11, S.114] hier für Krassowsky-Ellipsoid
-		* @param $hoch und $rechts (richtig formatiert, dies ist immer der fall, da die Daten passend in der DB abgelegt werden) $laenge wird passend ausgelesen
-		* @return $lat und $lon
+	    * These formulas based on [GJ11, S.114]
+		* transforms GK coordinates in geo. coorinates
+		* Krassowsky-Ellipsoid
+		* @param $hoch and $rechts (properly formatted, this is always the case, because the data is stored matching in the database)
+		* @return $lat and $lon
 		*/
 	public static function GK_geo_krass($hoch,$rechts,$laenge) {
-		//Umwandlung nicht notwendig
+		//Conversion is not necessary
 		$hw = $hoch;
 		$rw = $rechts;
 	
-		//mathematische Konstanten
+		//mathematical constants
 		$PI = pi();
 		$rho = 180 / $PI;
 		
-		//fuer Krassowsky-Ellipsoid
+		//Krassowsky-Ellipsoid
 		$e0 = 111134.861087;
 		$f2 = 0.144297408;
 		$f4 = 0.000211980;
@@ -306,18 +309,18 @@ class Transformation {
 		$a = 6378245;
 		$b = 6356863.019;
 		
-		//aus Streifenzonen laengen machen
+		//"strip zone"
 		$l0 = $laenge*3;
 		
-		//wichtige Terme
+		//important terms
 		$y = $rw - ((($l0/3)+0.5) * pow(10, 6));
-		//Polkrümmungshalbmesser
+		//"Polkrümmungshalbmesser"
 		$c = ($a * $a)/$b;
-		//2. numerische Exzentrizitaet
+		//"2. numerische Exzentrizitaet"
 		$e_strich_2 = (($a * $a)-($b * $b))/($b * $b);
 		$sigma = ($hw/$e0);
 
-		//Umformungen die fuer breite und laenge benoetigt werden
+		//Forming needed for the latitude and longitude
 		$sigma2 = $sigma * 2;
 		$sigma4 = $sigma * 4;
 		$sigma6 = $sigma * 6;
@@ -347,47 +350,46 @@ class Transformation {
 		$l_hilf3 = (1 - ($y_strich_2/6) * ($v2+(2*$t2) - ($y_strich_2 * $l_hilf2)));
 		$l = $l_hilf1  * $l_hilf3;
 
-		//lat und lon die Ergebnisse zuweisen
+		//lat and lon
 		$lat = $breite;
 		$lon = abs($l+$l0);
 		
-		//Werte sollten fuer laenge zwischen 5 und 16 liegen fuer die breite zwischen 46 und 56
+		//Werte sollten fuer laenge zwischen 5 and 16 liegen fuer die breite zwischen 46 and 56
 		//Ueberpruefung koennte eingebaut werden,
 		//allerdings stammen die GK-Koordinaten so direkt von der Budesanstalt fuer Wasserbau,
 		//somit ist eine Ueberpruefung nicht notwendig, da an den Werten nichts geaendert werden kann
 
 
-	//PHP hat immer nur einen Rückgabewert, deswegen geht dies nicht
+	//PHP has only a return value, so this does not work
 	//return $lat,$lon; !!!
-	//ein array ist aber nur eine Rückgabe
-	//deswegen geht folgendes
+	//an array is just one return value, this works
 	return array($lat, $lon);
 		
     }
 
 		/*
-		* verschiebt die Koordinaten vom Bessel-Ellipsoid auf Bessel kartesisch [GJ11, S.111]
-		* @param $lat und $lon auf dem Bessel-Ellipsoid
-		* @return $x und $y auf bessel
+		* shifts the coordinates from Bessel-Ellipsoid to Bessel Cartesian [GJ11, S.111]
+		* @param $lat and $lon Bessel-Ellipsoid
+		* @return $x and $y
 		*/
 	public static function geo_bessel_kart($lat,$lon,$pnp) {
-		//Umwandlung nicht notwendig trägt aber zum verständnis bei
+		//Conversion is not necessary
 		$breite = $lat;
 		$laenge = $lon;
 		
-		//Konstanten fuer Bessel-Ellipsoid
+		//Bessel-Ellipsoid
 		$a = 6377397.155;
 		$b = 6356075.963;
 		
-		//hoehe nicht gegeben daher 0 angenommen ...
+		//height not given, therefore, assumed to be 0 ...
 		//$h = 0;
 		//[Tor03, S. 291-293]
-		//höhe entspricht bezugspegel amsterdammer pegel 37 meter
+		//height reference level corresponds to level 37 meters Amsterdam
 		$h = 37;
-		//davon muss noch der pnp abgezogen bzw. addiert werden
+		//the PNP must be deducted or added from h
 		$h = $h - $pnp;
 		
-		//1. numerische Exzentrizitaet		
+		//"1. numerische Exzentrizitaet	"	
 		$e2 = (($a * $a) - ($b * $b)) / ( $a * $a);
 		
 		$sin_b = sin(deg2rad($breite));
@@ -404,37 +406,36 @@ class Transformation {
 		//$z = $n * $sin_b * (($b * $b) / ($a * $a)) + $h  * $sin_b
 		$z = (((1 - $e2) * $n) + $h ) * $sin_b;
 
-	//PHP hat immer nur einen Rückgabewert, deswegen geht dies nicht
+	//PHP has only a return value, so this does not work
 	//return $x,$y,$z; !!!
-	//ein array ist aber nur eine Rückgabe
-	//deswegen geht folgendes
+	//an array is just one return value, this works
 	return array($x, $y, $z);
 		
     }
 
 		/*
-		* verschiebt die Koordinaten vom Krassowsky-Ellipsoid auf Krassowsky kartesisch [GJ11, S.111]
-		* @param $lat und $lon auf dem Krassowsky-Ellipsoid
-		* @return $x und $y auf besserl
+		* shifts the coordinates from Krassowsky-Ellipsoid to Krassowsky Cartesian [GJ11, S.111]
+		* @param $lat and $lon Krassowsky-Ellipsoid
+		* @return $x and $y
 		*/
 	public static function geo_krass_kart($lat,$lon,$pnp) {
-		//Umwandlung nicht notwendig trägt aber zum verständnis bei
+		//Conversion is not necessary
 		$breite = $lat;
 		$laenge = $lon;
 		
-		//Konstanten Krassowsky-Ellipsoid
+		//Krassowsky-Ellipsoid
 		$a = 6378245;
 		$b = 6356863.019;
 		
-		//hoehe nicht gegeben daher 0 angenommen ...
+		//height not given, therefore, assumed to be 0 ...
 		//$h = 0;
-		//höhe entspricht bezugspegel kronstaedter pegel 16 meter niedriger als amsterdam 37-16 meter
+		//height reference level corresponds to "kronstadt" level 16 meters lower than amsterdam 37-16 meters 
 		//[Tor03, S. 291-293]
 		$h = 37-16;
-		//davon muss noch der pnp abgezogen bzw. addiert werden
+		//the PNP must be deducted or added from h
 		$h = $h - $pnp;
 		
-		//1. numerische Exzentrizitaet
+		//"1. numerische Exzentrizitaet"
 		$e2 = (($a * $a) - ($b * $b)) / ( $a * $a);
 		
 		$sin_b = sin(deg2rad($breite));
@@ -451,102 +452,98 @@ class Transformation {
 		//$z = $n * $sin_b * (($b * $b) / ($a * $a)) + $h  * $sin_b
 		$z = (((1 - $e2) * $n) + $h ) * $sin_b;
 
-	//PHP hat immer nur einen Rückgabewert, deswegen geht dies nicht
+	//PHP has only a return value, so this does not work
 	//return $x,$y,$z; !!!
-	//ein array ist aber nur eine Rückgabe
-	//deswegen geht folgendes
+	//an array is just one return value, this works
 	return array($x, $y, $z);
 		
     }
 
 		/*
-		* Rotation und Translation Bessel-Ellipsoid [GJ11, S.109-110]
-		* Translations Werte nach [Tor03, Kap.7]
-		* genauere Rotations Vektoren nach [BKG11b]
+		* Rotation and translation Bessel-Ellipsoid [GJ11, S.109-110]
+		* Translations values by [Tor03, Kap.7]
+		* better Translations values from [BKG11b]
 		* @param $x, $y, $z
 		* @return $x, $y, $z
 		*/
 	public static function rotation_translation_bessel_wgs84($x1,$y1,$z1) {
 
-	    // Rotierte Vektoren
-		//schon ausgerechnet Werte aus [BKG11b] sind noch in Radianten umzurechnen
+	    // Rotated vectors
+		//already calculated values from [BKG11b] are still to be converted into radians
 		//rotation X-axis +0.202" -> 0.0000119021759
 		//rotation Y-axis +0.045" -> 0.000000218166156
 		//rotation Z-axis -2.455" -> -0.0000009793236
-		//jeweils mal PI durch 180 durch 3600
+		//PI each time by 180 by 3600
 		
 		$x2 = ($x1 * 1) + ($y1 * 0.0000119021759) + ($z1 * 0.000000218166156);
         $y2 = ($x1 * -0.0000119021759) + ($y1 * 1) + ($z1 * -0.000000979323636);
         $z2 = ($x1 * -0.000000218166156) + ($y1 * 0.0000009793236) + ($z1 * 1);
 		
-		//massstabsfaktor liegt zwischen 0.99999 < m < 1.00001
-		//hier auf 0.9999933 gesetzt
+		//scale factor 0.99999 < m < 1.00001
+		//here 0.9999933
 		$m =  0.9999933;
 		
-        // Translationen anbringen
+        // translation
 		$x = ($x2 * $m) + 598.095;
 		$y = ($y2 * $m) + 73.707;
 		$z = ($z2 * $m) + 418.197;
 
-	//PHP hat immer nur einen Rückgabewert, deswegen geht dies nicht
+	//PHP has only a return value, so this does not work
 	//return $x,$y,$z; !!!
-	//ein array ist aber nur eine Rückgabe
-	//deswegen geht folgendes
+	//an array is just one return value, this works
 	return array($x, $y, $z);
 		
     }
 
 		/*
-		* Rotation und Translation Krassowsky-Ellipsoid [GJ11, S.109-110]
-		* Translations Werte nach [Tor03, Kap.7]
-		* genauere Rotations Vektoren nach [BKG11c]
+		* Rotation and translation Krassowsky-Ellipsoid [GJ11, S.109-110]
+		* Translations values by [Tor03, Kap.7]
+		* better Translations values from [BKG11c]
 		* @param $x, $y, $z
 		* @return $x, $y, $z
 		*/
 	public static function rotation_translation_krass_wgs84($x1,$y1,$z1) {
 
-	    // Rotierte Vektoren
-		//schon ausgerechnet Werte aus [BKG11c] sind noch in Radianten umzurechnen
+	    // Rotated vectors
+		//already calculated values from [BKG11c] are still to be converted into radians
 		//rotation X-axis -0.063" -> -0.000000305433
 		//rotation Y-axis -0.247" -> -0.000001197489
 		//rotation Z-axis -0.041" -> -0.000000198774
-		//jeweils mal PI durch 180 durch 3600
+		//PI each time by 180 by 3600
 		
         $x2 = ($x1 * 1) + ($y1 * -0.000000305433) + ($z1 * -0.000001197489);
         $y2 = ($x1 * 0.000000305433) + ($y1 * 1) + ($z1 * -0.000000198774);
         $z2 = ($x1 * 0.000001197489) + ($y1 * 0.000000198774) + ($z1 * 1);
 		
-		//massstabsfaktor liegt zwischen 0.99999 < m < 1.00001
-		//hier auf 0.9999933 gesetzt
+		//scale factor 0.99999 < m < 1.00001
+		//here 0.9999933
 		$m =  0.9999933;
 		
-        // Translationen anbringen
+        // translation
 		$x = ($x2 * $m) + 24.9;
 		$y = ($y2 * $m) - 126.4;
 		$z = ($z2 * $m) - 93.2;
 
-	//PHP hat immer nur einen Rückgabewert, deswegen geht dies nicht
+	//PHP has only a return value, so this does not work
 	//return $x,$y,$z; !!!
-	//ein array ist aber nur eine Rückgabe
-	//deswegen geht folgendes
+	//an array is just one return value, this works
 	return array($x, $y, $z);
 		
     }
 	
 		/*
-		* wandelt die kartesischen Koordinaten die mit rotation_translation umgewandelt wurden
-		* in breite und laenge auf WGS84 um
+		* transforms the Cartesian coordinates with translation to WGS84
 		* [GJ11, S.112]
-		* @param $x, $y und $z
-		* @return $lat und $lon auf WGS84
+		* @param $x, $y and $z
+		* @return $lat and $lon WGS84
 		*/
 	public static function kart_wgs84_geo($x,$y,$z) {
 		
-		//mathematische Konstanten
+		//mathematical constants
 		$PI = pi();
 		$rho = 180 / $PI;
 		
-		//Konstanten
+		//constants
 		$a = 6378137;
 		$b = 6356752.314;
 		
@@ -564,32 +561,31 @@ class Transformation {
 
 		$laenge = atan($y/$x);
 		
-		//aus anderer formel
+		//from other formulaic
 		//$breite = atan((($z + ($e2 * ($a *$a) / $b * $sin_phi_3)) / ($p - ($e2 * $a * $cos_phi_3))));
 		$breite = atan(($z + ($e2_strich * $b * $sin_phi_3))/($p - ($e2 * $a * $cos_phi_3)));
 		
-		//lat und lon die Ergebnisse zuweisen, wichtig mal rho nicht vergessen
+		//lat and lon assign to the results, important not forgotten rho
 		$lat = $breite * $rho;
 		$lon = $laenge * $rho;
 		
-	//PHP hat immer nur einen Rückgabewert, deswegen geht dies nicht
+	//PHP has only a return value, so this does not work
 	//return $lat,$lon; !!!
-	//ein array ist aber nur eine Rückgabe
-	//deswegen geht folgendes
+	//an array is just one return value, this works
 	return array($lat, $lon);
 		
     }
 	
 	/*
-     * Zahlen auf feste Stellen runden, wenn fuer osm benoetigt
-	 * @param $zahl und $stelle
-	 * @retrun $zahl (gerundet)
+     * rounded if required for osm 
+	 * @param $zahl and $stelle
+	 * @retrun $zahl (rounded)
      */
 	public static function r_round($zahl, $stelle) {
 	$digit = pow(10, $stelle);
 	$zahl = ($zahl * $digit);
 	$zahl = round($zahl);
-	//oder
+	//or
 	//$zahl = ceil($zahl);
 	$zahl = ($zahl / $digit);
 	

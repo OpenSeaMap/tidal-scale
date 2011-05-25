@@ -1,22 +1,22 @@
 <?php
 /*
-erstellt von Tim Reinartz im Rahmen der Bachelor-Thesis
-letzte Änderung 15.05.11 15:02 Uhr
-Aufgabe der Datei:
-Stellt die MySQL Funktionalität bereit.
+Created by Tim Reinartz as part of the Bachelor Thesis
+last update 25.05.11 12:25 Uhr
+The object of the file:
+Sets the MySQL functionality.
 */
 
 class MySQL {
 
     /*
-     * Die Datenbank Verbindung
+     * The database connection
      */
 	private $dbCon = false;
 	private $sumQryTime;
 	private $sumQryCount;
 	
 	/*
-	 * Stellt eine MySQL Verbindung her
+	 * Provides a MySQL connection
 	 * @param $host
 	 * @param $user
 	 * @param $pw
@@ -45,10 +45,10 @@ class MySQL {
 	}
 	
     /*
-     * Führt ein sql query aus, wenn diese Anfrage falsch ist wird eine Fehlermeldung ausgegeben
-	 * und diese in ein log File geschrieben
-	 * @param qry - der auszuführende string
-	 * @param debug = false - wenn TRUE, wird der query string angezeigt(echo)
+     * Executes a sql query when this request is wrong, an error message is displayed
+	 * and written to a log file
+	 * @param qry - the string to be executed
+	 * @param debug = false - if TRUE, the query string appears(echo)
 	 * @return das mysql result 
      */
 	public function qry($qry, $debug = false) {
@@ -86,32 +86,32 @@ class MySQL {
 	}
 	
 	/*
-	 * Gibt die Anzahl der betroffenen Zeilen der letzten Abfrage zurück
-	 * @return int - Anzahl betroffener Zeilen
+	 * Returns the number of rows affected by the last query
+	 * @return int - Number of affected rows
 	 */
 	public function affectedRows() {
 		return mysql_affected_rows($this->dbCon);
 	}
 	
 	/*
-	 * Liefert die aktuelle Connection
-	 * @return Mysql identifier oder null
+	 * Return the current Connection
+	 * @return Mysql identifier or null
 	 */
 	public function getConnection() {
 		return $this->dbCon;
 	}
 	
 	/*
-	 * Liefert die Anzahl der bis zu diesem Zeitpunkt ausgeführten Datenbankabfragen
-	 * @return int - Anzahl Abfragen
+	 * Returns the number of by this time running data base queries
+	 * @return int - number of queries
 	 */
 	public function getQueryCount() {
 		return $this->sumQryCount;
 	}
 	
 	/*
-	 * Liefert die Summe der Dauer der bisher ausgeführten Abfragen
-	 * @return int - Abfrage Zeit
+	 * Returns the sum of the duration of the previously executed queries
+	 * @return int - querry time
 	 */
 	public function getQueryTimeSum() {
 		return $this->sumQryTime;
