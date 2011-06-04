@@ -208,7 +208,7 @@ class Transformation {
 		* @param $hoch and $rechts (properly formatted, this is always the case, because the data is stored matching in the database)
 		* @return $lat and $lon
 		*/
-	public static function GK_geo_bessel($hoch,$rechts,$laenge) {
+	public static function GK_geo_bessel($hoch,$rechts,$zone) {
 		//Conversion is not necessary
 		$hw = $hoch;
 		$rw = $rechts;
@@ -227,7 +227,7 @@ class Transformation {
 		$b = 6356078.963;
 		
 		//"strip zone"
-		$l0 = $laenge*3;
+		$l0 = $zone*3;
 		
 		//important terms
 		$y = $rw - ((($l0/3)+0.5) * pow(10, 6));
@@ -291,7 +291,7 @@ class Transformation {
 		* @param $hoch and $rechts (properly formatted, this is always the case, because the data is stored matching in the database)
 		* @return $lat and $lon
 		*/
-	public static function GK_geo_krass($hoch,$rechts,$laenge) {
+	public static function GK_geo_krass($hoch,$rechts,$zone) {
 		//Conversion is not necessary
 		$hw = $hoch;
 		$rw = $rechts;
@@ -310,7 +310,7 @@ class Transformation {
 		$b = 6356863.019;
 		
 		//"strip zone"
-		$l0 = $laenge*3;
+		$l0 = $zone*3;
 		
 		//important terms
 		$y = $rw - ((($l0/3)+0.5) * pow(10, 6));

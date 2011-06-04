@@ -203,10 +203,10 @@ class Transformation {
 	
 	   /*
 		* GK koordinaten in Geo. Koordinaten [GJ11, S.114] hier für Bessel-Ellipsoid
-		* @param $hoch und $rechts (richtig formatiert, dies ist immer der fall, da die Daten passend in der DB abgelegt werden) $laenge wird passend ausgelesen
+		* @param $hoch und $rechts (richtig formatiert, dies ist immer der fall, da die Daten passend in der DB abgelegt werden) $zone wird passend ausgelesen
 		* @return $lat und $lon
 		*/
-	public static function GK_geo_bessel($hoch,$rechts,$laenge) {
+	public static function GK_geo_bessel($hoch,$rechts,$zone) {
 		//Umwandlung nicht notwendig
 		$hw = $hoch;
 		$rw = $rechts;
@@ -225,7 +225,7 @@ class Transformation {
 		$b = 6356078.963;
 		
 		//aus Streifenzonen laengen machen
-		$l0 = $laenge*3;
+		$l0 = $zone*3;
 		
 		//wichtige Terme
 		$y = $rw - ((($l0/3)+0.5) * pow(10, 6));
@@ -285,10 +285,10 @@ class Transformation {
 	
 	   /*
 		* GK-Koordinaten in Geo. Koordinaten [GJ11, S.114] hier für Krassowsky-Ellipsoid
-		* @param $hoch und $rechts (richtig formatiert, dies ist immer der fall, da die Daten passend in der DB abgelegt werden) $laenge wird passend ausgelesen
+		* @param $hoch und $rechts (richtig formatiert, dies ist immer der fall, da die Daten passend in der DB abgelegt werden) $zone wird passend ausgelesen
 		* @return $lat und $lon
 		*/
-	public static function GK_geo_krass($hoch,$rechts,$laenge) {
+	public static function GK_geo_krass($hoch,$rechts,$zone) {
 		//Umwandlung nicht notwendig
 		$hw = $hoch;
 		$rw = $rechts;
@@ -307,7 +307,7 @@ class Transformation {
 		$b = 6356863.019;
 		
 		//aus Streifenzonen laengen machen
-		$l0 = $laenge*3;
+		$l0 = $zone*3;
 		
 		//wichtige Terme
 		$y = $rw - ((($l0/3)+0.5) * pow(10, 6));
