@@ -1,9 +1,9 @@
 <div>
-<p><b>Installation abgeschlossen</b></p>
+<p><b>Installation Complete</b></p>
 <p>
-Die Installation ist nun abgeschlossen<br><br>
-Bitte entfernen Sie zur Sicherheit den Ordner <b>install</b> von Ihrem Server<br><br>
-Nun sollten Sie die fuer die automatische Aktualisierung der Daten notwendigen Schritte durchfuehren,<br>
-bitte sehen Sie dazu im Benutzerhandbuch unter B.5 nach.<br>
+The installation is now complete<br><br>
+Please remove the folder <b> install </b> from your server<br><br>
+Now the necessary steps for automatic updating of data should be performed,<br>
+please look at B.5 at the manual.<br>
 </p>
 </div>

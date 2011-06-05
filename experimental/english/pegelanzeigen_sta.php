@@ -1,13 +1,13 @@
 <!--
 Created by Tim Reinartz as part of the Bachelor Thesis
-last update 04.06.11 12:52 Uhr
+last update 05.06.11 13:03 Uhr
 The object of the file:
 Query of information to display markers on the map saved in one file
 -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <html>
     <head>
-        <title>getPegelTest statisch Werte stehen in einer txt datei</title>
+        <title>getPegelTest static values in a txt file</title>
     </head>
     <body>
 <?php
@@ -41,9 +41,9 @@ $file=fopen($datei,"w+");
 fputs($file,$txt);
 fclose($file);
 
-echo "txt erstellen erfolgreich";
+echo "creating txt successful";
 //write to logfile
-$msg = "txt erstellen erfolgreich";
+$msg = "creating txt successful";
 Log::write(LOG_OTHER, $msg);
 ?>
 <br><br>

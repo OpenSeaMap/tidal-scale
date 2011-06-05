@@ -1,7 +1,7 @@
 <div>
-<p><b>Datenbank Tabellen anlegen</b></p>
+<p><b>create database tables</b></p>
 <p>
-Nun werden die benoetigten Tabellen in der Datenbank angelegt:<br><br>
+Now the required tables are created in the database:<br><br>
 <?php
 $result = $db->qry(" 
 CREATE TABLE IF NOT EXISTS `pegelstaende` (
@@ -22,11 +22,11 @@ CREATE TABLE IF NOT EXISTS `pegelstaende` (
 ");
 	if ($result)
 	{
-	echo "table pegelsteande einfuegen: erfolg<br>";
+	echo "insert table pegelsteande: done<br>";
 	}
 	else
 	{
-	echo 'table einfuegen: fehler bitte in sql.log nachsehen';
+	echo 'insert table : error see sql.log';
 	}
 
 $result2 = $db->qry(" 
@@ -57,18 +57,18 @@ CREATE TABLE IF NOT EXISTS `pegelstaende2` (
 ");
 	if ($result2)
 	{
-	echo "table pegelsteande2 einfuegen: erfolg<br>";
+	echo "insert table pegelsteande2: done<br>";
 	}
 	else
 	{
-	echo 'table einfuegen: fehler bitte in sql.log nachsehen';
+	echo 'insert table : error see sql.log';
 	}
 
 ?>
 <br><br>
-<?=$db->getQueryCount()?> Datenbankabfragen in <?=substr($db->getQueryTimeSum(),0,6)?> Sekunden.
+<?=$db->getQueryCount()?> Database queries in <?=substr($db->getQueryTimeSum(),0,6)?> seconds.
 
 </p>
-<p>Klicken Sie auf &quot;Weiter&quot; um fortzufahren</p>
+<p>Click &quot;Next&quot; to continue</p>
 </div>
-<div><input type="submit" value="Weiter" /></div>
+<div><input type="submit" value="Next" /></div>

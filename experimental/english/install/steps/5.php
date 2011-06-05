@@ -1,12 +1,12 @@
 <div>
-<p><b>GK Koordinaten Bessel transformieren</b></p>
+<p><b>GK coordinates Bessel transform</b></p>
 <p>
-Es werden die notwendigen Transformationen fuer den Bessel-Ellipsoid durchgefuehrt:<br><br>
+Necessary transformations for the Bessel ellipsoid:<br><br>
 <?php
 Daten::set_coord_bessel();
  ?>
- <?=$db->getQueryCount()?> Datenbankabfragen in <?=substr($db->getQueryTimeSum(),0,6)?> Sekunden. 
+ <?=$db->getQueryCount()?> Database queries in <?=substr($db->getQueryTimeSum(),0,6)?> seconds. 
 </p>
-<p>Klicken Sie auf &quot;Weiter&quot; um fortzufahren</p>
+<p>Click &quot;Next&quot; to continue</p>
 </div>
-<div><input type="submit" value="Weiter" /></div>
+<div><input type="submit" value="Next" /></div>

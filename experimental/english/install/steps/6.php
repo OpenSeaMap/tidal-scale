@@ -1,12 +1,12 @@
 <div>
-<p><b>GK Koordinaten Krassowsky transformieren</b></p>
+<p><b>GK coordinates Krassowsky transform</b></p>
 <p>
-Es werden die notwendigen Transformationen fuer den Krassowsky-Ellipsoid durchgefuehrt:<br><br>
+Necessary transformations for the Krassowsky ellipsoid:<br><br>
 <?php
 Daten::set_coord_krass();
  ?>
- <?=$db->getQueryCount()?> Datenbankabfragen in <?=substr($db->getQueryTimeSum(),0,6)?> Sekunden. 
+ <?=$db->getQueryCount()?> Database queries in <?=substr($db->getQueryTimeSum(),0,6)?> seconds. 
 </p>
-<p>Klicken Sie auf &quot;Weiter&quot; um fortzufahren</p>
+<p>Click &quot;Next&quot; to continue</p>
 </div>
-<div><input type="submit" value="Weiter" /></div>
+<div><input type="submit" value="Next" /></div>

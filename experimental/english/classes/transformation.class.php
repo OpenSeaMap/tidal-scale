@@ -1,7 +1,7 @@
 <?php
 /*
 Created by Tim Reinartz as part of the Bachelor Thesis
-last update 25.05.11 12:25 Uhr
+last update 05.06.11 13:25 Uhr
 The object of the file:
 All transformations in a class
 allocated to different functions
@@ -90,8 +90,8 @@ class Transformation {
 		public static function GK_geo_6point_3eck($hoch,$rechts) {
 		
 		/*
-		Punkte bilden ein Dreieck
-		Breite and Laenge berechnet mit [BKG11]
+		Points are a triangle
+		Width and length calculated with [BKG11]
 		Rechts		Hoch
 		Laenge 		Breite
 		KONSTANZ
@@ -115,7 +115,7 @@ class Transformation {
 		b= [47.66178,53.57685,53.75560,9.18214,6.66142,14.06624]';
 		x= vpa(A\b)
 
-		Ergibt:
+		results:
 		0.00000898602650489
 		-0.000000000611562607167
 		0.214132498492
@@ -150,8 +150,8 @@ class Transformation {
 	public static function GK_geo_6point($hoch,$rechts) {
 	
 		/*
-		Punkte willkührlich gewählt
-		Breite and Laenge berechnet mit [BKG11]
+		Points randomly choosed
+		Width and length calculated with [BKG11]
 		Rechts		Hoch
 		Laenge 		Breite
 		KÖLN
@@ -175,7 +175,7 @@ class Transformation {
 		b= [50.93695,54.51138,53.78437,6.96330,9.56916,9.40944]';
 		x= vpa(A\b)
 
-		Ergibt:
+		results:
 		0.0000089571933
 		0.00000015506242
 		-0.16132672
@@ -270,11 +270,6 @@ class Transformation {
 		//lat and lon
 		$lat = $breite;
 		$lon = abs($l+$l0);
-		
-		//Werte sollten fuer laenge zwischen 5 and 16 liegen fuer die breite zwischen 46 and 56
-		//Ueberpruefung koennte eingebaut werden,
-		//allerdings stammen die GK-Koordinaten so direkt von der Budesanstalt fuer Wasserbau,
-		//somit ist eine Ueberpruefung nicht notwendig, da an den Werten nichts geaendert werden kann
 
 	//PHP has only a return value, so this does not work
 	//return $lat,$lon; !!!
@@ -353,12 +348,6 @@ class Transformation {
 		//lat and lon
 		$lat = $breite;
 		$lon = abs($l+$l0);
-		
-		//Werte sollten fuer laenge zwischen 5 and 16 liegen fuer die breite zwischen 46 and 56
-		//Ueberpruefung koennte eingebaut werden,
-		//allerdings stammen die GK-Koordinaten so direkt von der Budesanstalt fuer Wasserbau,
-		//somit ist eine Ueberpruefung nicht notwendig, da an den Werten nichts geaendert werden kann
-
 
 	//PHP has only a return value, so this does not work
 	//return $lat,$lon; !!!

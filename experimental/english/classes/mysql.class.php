@@ -1,7 +1,7 @@
 <?php
 /*
 Created by Tim Reinartz as part of the Bachelor Thesis
-last update 25.05.11 12:25 Uhr
+last update 05.06.11 13:25 Uhr
 The object of the file:
 Sets the MySQL functionality.
 */
@@ -62,7 +62,7 @@ class MySQL {
 		$aft = Util::getNanoSeconds();
 		
 	    if (!$result) {
-	    	$msg = 'Falsches SQL Query:'."\n\n";
+	    	$msg = 'Wrong SQL Query:'."\n\n";
 	    	$msg.= $qry."\n\n";
 	    	$msg.= mysql_error($this->dbCon)."\n\n";
 	    	Log::write(LOG_SQL, $msg);

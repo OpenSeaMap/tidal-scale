@@ -1,7 +1,7 @@
 <?php
 /*
 Created by Tim Reinartz as part of the Bachelor Thesis
-last update 25.05.11 12:25 Uhr
+last update 05.06.11 13:25 Uhr
 The object of the file:
 all the important functions that deal with the data stored in MySQL in one class
 */
@@ -24,17 +24,17 @@ public static function compare_coord() {
 	//appropriate number of select query in this case 20
 	  $result20Pegel = $db->qry(" SELECT pegelnummer,Rechtswert_GK,Hochwert_GK,lat,lon FROM ".TABLE_PEGEL2." ORDER BY `pegelnummer` DESC LIMIT 0, 20 ");
 	  if ($result20Pegel){
-		echo 'erfolg verbindung und auswahl';
+		echo 'successful connection and selection';
 		echo '<br><br>';
 		//write to logfile 
-		$msg = "erfolg verbindung und auswahl";
+		$msg = "successful connection and selection";
 		Log::write(LOG_OTHER, $msg);
 		}
 		else {
-		echo 'fehler verbindung und auswahl';
+		echo 'error connection and selection';
 		echo '<br><br>';
 		//write to logfile 
-		$msg = "erfolg verbindung und auswahl";
+		$msg = "error connection and selection";
 		Log::write(LOG_OTHER, $msg);
 		}
 	  
@@ -46,16 +46,16 @@ public static function compare_coord() {
 			$rw = $row20Pegel["Rechtswert_GK"];
 			$hw = $row20Pegel["Hochwert_GK"];
 			echo $pegelnummer;
-			echo '<br><br>Datenbank:<br><br>';
+			echo '<br><br>Database:<br><br>';
 			echo $row20Pegel["lat"];
 			echo '<br>';
 			echo $row20Pegel["lon"];
-		echo '<br><br>Aehnlichkeit<br><br>';
+		echo '<br><br>Similarity<br><br>';
 		$avar = Transformation::GK_geo_6point($hw,$rw);
 		echo $avar[0];
 		echo '<br>';
 		echo $avar[1];
-			echo '<br><br>Aehnlichkeit_3eck<br><br>';
+			echo '<br><br>Similarity triangle<br><br>';
 			$bvar = Transformation::GK_geo_6point_3eck($hw,$rw);
 			echo $bvar[0];
 			echo '<br>';
@@ -78,15 +78,15 @@ public static function set_coord_extern() {
 	//appropriate number of select query in this case 40-80
 	  $result5Pegel = $db->qry(" SELECT pegelnummer,Rechtswert_GK,Hochwert_GK,lat,lon,daten_fehler FROM ".TABLE_PEGEL2." WHERE `lat` = '' AND `lon` = '' AND `Rechtswert_GK` != '0.00' AND `Hochwert_GK` != '0.00' ORDER BY `pegelnummer` DESC LIMIT 0, 40 ");
 	  if ($result5Pegel){
-		echo 'erfolg verbindung und auswahl';
+		echo 'successful connection and selection';
 		//write to logfile 
-		$msg = "erfolg verbindung und auswahl";
+		$msg = "successful connection and selection";
 		Log::write(LOG_OTHER, $msg);
 		}
 		else {
-		echo 'fehler verbindung und auswahl';
+		echo 'error connection and selection';
 		//write to logfile 
-		$msg = "fehler verbindung und auswahl";
+		$msg = "error connection and selection";
 		Log::write(LOG_OTHER, $msg);
 		}
 	  
@@ -117,14 +117,14 @@ public static function set_coord_extern() {
 	WHERE pegelnummer='$pegelnummer' ");
 
 	if ($result){
-	echo 'erfolg update koordinaten';
+	echo 'successful update coordinates';
 	echo '<br><br>';
 		//write to logfile 
-	$msg = "erfolg update koordinaten";
+	$msg = "successful update coordinates";
 	Log::write(LOG_OTHER, $msg);
 	}
 	else {
-	echo 'fehler bitte in sql.log nachsehen';
+	echo 'error see sql.log';
 	}
 	 } 
 	  }
@@ -142,15 +142,15 @@ public static function set_coord_formel() {
 	//appropriate number of select query in this case 500-1000
 	  $result5Pegel = $db->qry(" SELECT pegelnummer,Rechtswert_GK,Hochwert_GK,lat,lon,daten_fehler FROM ".TABLE_PEGEL2." WHERE `lat` = '' AND `lon` = '' AND `Rechtswert_GK` != '0.00' AND `Hochwert_GK` != '0.00' ORDER BY `pegelnummer` DESC LIMIT 0, 500 ");
 	  if ($result5Pegel){
-		echo 'erfolg verbindung und auswahl';
+		echo 'successful connection and selection';
 		//write to logfile 
-		$msg = "erfolg verbindung und auswahl";
+		$msg = "successful connection and selection";
 		Log::write(LOG_OTHER, $msg);
 		}
 		else {
-		echo 'fehler verbindung und auswahl';
+		echo 'error connection and selection';
 		//write to logfile 
-		$msg = "fehler verbindung und auswahl";
+		$msg = "error connection and selection";
 		Log::write(LOG_OTHER, $msg);
 		}
 	  
@@ -176,14 +176,14 @@ public static function set_coord_formel() {
 	WHERE pegelnummer='$pegelnummer' ");
 
 	if ($result){
-	echo 'erfolg update koordinaten';
+	echo 'successful update coordinates';
 	echo '<br><br>';
 		//write to logfile 
-	$msg = "erfolg update koordinaten";
+	$msg = "successful update coordinates";
 	Log::write(LOG_OTHER, $msg);
 	}
 	else {
-	echo 'fehler bitte in sql.log nachsehen';
+	echo 'error see sql.log';
 	}
 		
 	} }
@@ -202,15 +202,15 @@ public static function set_coord_aehnlichkeit() {
 	//appropriate number of select query in this case 1500 - 3000
 	  $result5Pegel = $db->qry(" SELECT pegelnummer,Rechtswert_GK,Hochwert_GK,lat,lon,daten_fehler FROM ".TABLE_PEGEL2." WHERE `lat` = '' AND `lon` = '' AND `Rechtswert_GK` != '0.00' AND `Hochwert_GK` != '0.00' ORDER BY `pegelnummer` DESC LIMIT 0, 1500 ");
 	  if ($result5Pegel){
-		echo 'erfolg verbindung und auswahl';
+		echo 'successful connection and selection';
 		//write to logfile 
-		$msg = "erfolg verbindung und auswahl";
+		$msg = "successful connection and selection";
 		Log::write(LOG_OTHER, $msg);
 		}
 		else {
-		echo 'fehler verbindung und auswahl';
+		echo 'error connection and selection';
 		//write to logfile 
-		$msg = "fehler verbindung und auswahl";
+		$msg = "error connection and selection";
 		Log::write(LOG_OTHER, $msg);
 		}
 		
@@ -237,14 +237,14 @@ public static function set_coord_aehnlichkeit() {
 	WHERE pegelnummer='$pegelnummer' ");
 
 	if ($result){
-	echo 'erfolg update koordinaten';
+	echo 'successful update coordinates';
 	echo '<br><br>';
 		//write to logfile 
-	$msg = "erfolg update koordinaten";
+	$msg = "successful update coordinates";
 	Log::write(LOG_OTHER, $msg);
 	}
 	else {
-	echo 'fehler bitte in sql.log nachsehen';
+	echo 'error see sql.log';
 	}
 		
 	} }
@@ -263,15 +263,15 @@ public static function set_coord_bessel() {
 	//appropriate number of select query in this case 400 - 600
 	  $result5Pegel = $db->qry(" SELECT pegelnummer,Rechtswert_GK,Hochwert_GK,lat,lon,streifenzone,ellipsoid,daten_fehler,pnp FROM ".TABLE_PEGEL2." WHERE `lat` = '' AND `lon` = '' AND `Rechtswert_GK` != '0.00' AND `Hochwert_GK` != '0.00' AND `ellipsoid` = 'Bessel 1841' ORDER BY `pegelnummer` DESC LIMIT 0, 450 ");
 	  if ($result5Pegel){
-		//echo 'erfolg verbindung und auswahl';
+		//echo 'success';
 		//write to logfile 
-		$msg = "erfolg verbindung und auswahl";
+		$msg = "successful connection and selection";
 		Log::write(LOG_OTHER, $msg);
 		}
 		else {
-		echo 'fehler verbindung und auswahl';
+		echo 'error connection and selection';
 		//write to logfile 
-		$msg = "fehler verbindung und auswahl";
+		$msg = "error connection and selection";
 		Log::write(LOG_OTHER, $msg);
 		}
 	  
@@ -290,19 +290,15 @@ public static function set_coord_bessel() {
 		
 		//transformation with formula
 		$bvar = Transformation::GK_geo_bessel($hw,$rw,$avar[1]);
-		//echo '<br><br>l und b<br>';
 		//var_dump($bvar);
 		
 		$cvar = Transformation::geo_bessel_kart($bvar[0],$bvar[1],$pnp);
-		//echo '<br><br>kart<br>';
 		//var_dump($cvar);
 		
 		$dvar = Transformation::rotation_translation_bessel_wgs84($cvar[0],$cvar[1],$cvar[2]);
-		//echo '<br><br>nach rot und trans<br>';
 		//var_dump($dvar);
 		
 		$evar = Transformation::kart_wgs84_geo($dvar[0],$dvar[1],$dvar[2]);
-		//echo '<br><br>nach umwandlung<br>';
 		//var_dump($evar);
 		
 		//importance: php has only one return value, here is an array that is set appropriately
@@ -317,13 +313,13 @@ public static function set_coord_bessel() {
 
 	if ($result){
 	//echo '<br><br>';
-	//echo 'erfolg update koordinaten';
+	//echo 'success update';
 		//write to logfile 
-	$msg = "erfolg update der koordinaten von pegelnummer '. $pegelnummer .'";
+	$msg = "successful update coordinates pegelnummer '. $pegelnummer .'";
 	Log::write(LOG_OTHER, $msg);
 	}
 	else {
-	echo 'fehler bitte in sql.log nachsehen';
+	echo 'error see sql.log';
 	}
 		
 	} }
@@ -344,13 +340,13 @@ public static function set_coord_krass() {
 	  if ($result5Pegel){
 		//echo 'erfolg verbindung und auswahl';
 		//write to logfile 
-		$msg = "erfolg verbindung und auswahl";
+		$msg = "successful connection and selection";
 		Log::write(LOG_OTHER, $msg);
 		}
 		else {
-		echo 'fehler verbindung und auswahl';
+		echo 'error connection and selection';
 		//write to logfile 
-		$msg = "fehler verbindung und auswahl";
+		$msg = "error connection and selection";
 		Log::write(LOG_OTHER, $msg);
 		}
 	  
@@ -369,19 +365,15 @@ public static function set_coord_krass() {
 		
 		//transformation with formula
 		$bvar = Transformation::GK_geo_krass($hw,$rw,$avar[1]);
-		//echo '<br><br>l und b<br>';
 		//var_dump($bvar);
 		
 		$cvar = Transformation::geo_krass_kart($bvar[0],$bvar[1],$pnp);
-		//echo '<br><br>kart<br>';
 		//var_dump($cvar);
 		
 		$dvar = Transformation::rotation_translation_krass_wgs84($cvar[0],$cvar[1],$cvar[2]);
-		//echo '<br><br>nach rot und trans<br>';
 		//var_dump($dvar);
 		
 		$evar = Transformation::kart_wgs84_geo($dvar[0],$dvar[1],$dvar[2]);
-		//echo '<br><br>nach umwandlung<br>';
 		//var_dump($evar);
 		
 		//importance: php has only one return value, here is an array that is set appropriately
@@ -396,13 +388,13 @@ public static function set_coord_krass() {
 
 	if ($result){
 	//echo '<br><br>';
-	//echo 'erfolg update koordinaten';
+	//echo 'success update';
 		//write to logfile 
-	$msg = "erfolg update der koordinaten von pegelnummer '. $pegelnummer .'";
+	$msg = "successful update coordinates pegelnummer '. $pegelnummer .'";
 	Log::write(LOG_OTHER, $msg);
 	}
 	else {
-	echo 'fehler bitte in sql.log nachsehen';
+	echo 'error see sql.log';
 	}
 		
 	} }
@@ -456,19 +448,19 @@ public static function save_update_xml($pegelnummer, $pegelname, $km, $messwert,
 			$result = $db->qry(" INSERT INTO ".TABLE_PEGEL." (pegelnummer,pegelname,km,messwert,datum,uhrzeit,pnp,tendenz,daten_fehler) VALUES ('$pegelnummer','$pegelname','$km','$messwert','$datum','$uhrzeit','$pnp','$tendenz','$daten_fehler') ON DUPLICATE KEY UPDATE pegelname=VALUES(pegelname), km=VALUES(km), messwert=VALUES(messwert), datum=VALUES(datum), uhrzeit=VALUES(uhrzeit), pnp=VALUES(pnp), tendenz=VALUES(tendenz), daten_fehler=VALUES(daten_fehler); ");
 			if ($result)
 			{
-			echo 'update: daten erfolg';
+			echo 'update: success';
 		//write to logfile 
-			$msg = "update: daten erfolg";
+			$msg = "update: success";
 			Log::write(LOG_OTHER, $msg);
 			}
 			else
 			{
-			echo 'update: fehler bitte in sql.log nachsehen';
+			echo 'update: error see sql.log';
 			}
 		}
 		else
 		{
-		echo 'update: fehler pegelnummer oder messwert nicht vorhanden';
+		echo 'update: error pegelnummer or messwert missing';
 		}
 		return;
 		}
@@ -548,20 +540,20 @@ public static function save_update_soap($pegelnummer, $pegelname, $km, $messwert
 		if ($result)
 		{
 		/*
-		echo 'update: daten erfolg';
+		echo 'update: success';
 		//write to logfile 
-			$msg = "update: daten erfolg";
+			$msg = "update: success";
 			Log::write(LOG_OTHER, $msg);
 		*/
 		}
 		else
 		{
-		echo 'update: fehler bitte in sql.log nachsehen';
+		echo 'update: error see sql.log';
 		}
 	}
 	else
 	{
-	echo 'update: fehler pegelnummer oder messwert nicht vorhanden';
+	echo 'update: error pegelnummer or messwert missing';
 	}
 	return;
 	}	
@@ -614,16 +606,16 @@ public static function save_update_xml_shell($pegelnummer, $pegelname, $km, $mes
 			$result = $db->qry(" INSERT INTO ".TABLE_PEGEL2." (pegelnummer,pegelname,km,messwert,datum,uhrzeit,pnp,tendenz,daten_fehler) VALUES ('$pegelnummer','$pegelname','$km','$messwert','$datum','$uhrzeit','$pnp','$tendenz','$daten_fehler') ON DUPLICATE KEY UPDATE pegelname=VALUES(pegelname), km=VALUES(km), messwert=VALUES(messwert), datum=VALUES(datum), uhrzeit=VALUES(uhrzeit), pnp=VALUES(pnp), tendenz=VALUES(tendenz), daten_fehler=VALUES(daten_fehler); ");
 			if ($result)
 			{
-			//echo 'update: daten erfolg';
+			//echo 'update: success';
 			}
 			else
 			{
-			echo 'update: fehler bitte in sql.log nachsehen';
+			echo 'update: error see sql.log';
 			}
 		}
 		else
 		{
-		echo 'update: fehler pegelnummer oder messwert nicht vorhanden';
+		echo 'update: error pegelnummer or messwert missing';
 		}
 		return;
 		}

@@ -1,7 +1,7 @@
 <?php
 /*
 Created by Tim Reinartz as part of the Bachelor Thesis
-last update 25.05.11 12:25 Uhr
+last update 05.06.11 13:25 Uhr
 The object of the file:
 All important functions are integrated into a helper class
 */
@@ -127,7 +127,7 @@ class Util {
 		if($wert != '') {
 		echo $wert;
 		}else{
-		echo 'achtung keine daten vorhanden';
+		echo 'no data';
 		}
 		return;
 	}
@@ -168,9 +168,9 @@ class Util {
 		if(file_exists($datei)) {
 		$escape = escapeshellarg($datei);
 		exec("rm " . $escape);
-		echo '<p>Die Datei '. $datei .' wurde entfernt</p>';
+		echo '<p>File '. $datei .' was removed</p>';
 		} else {
-		echo '<p>Die Datei '. $datei .' ist nicht vorhanden</p>';
+		echo '<p>File '. $datei .' is not available</p>';
 		}
 		return;
 	}
@@ -290,10 +290,10 @@ class Util {
 		$fehler = '<br>'; 
 		}
 		elseif($fehler == 1) {
-		$fehler = '<br><font color="red"><b>Ausser Betrieb</b></font><br>'; 
+		$fehler = '<br><font color="red"><b>Out of Service</b></font><br>'; 
 		}
 		elseif($fehler == 2) {
-		$fehler = '<br><font color="red">Kein PnP Wert vorhanden</font><br>'; 
+		$fehler = '<br><font color="red">No PnP present</font><br>'; 
 		}
 		else {
 		$fehler = '<br>'; 
@@ -316,10 +316,10 @@ class Util {
 		$fehler = ''; 
 		}
 		elseif($fehler == 1) {
-		$fehler = '<font color="red"><b>Ausser Betrieb</b></font>'; 
+		$fehler = '<font color="red"><b>Out of Service</b></font>'; 
 		}
 		elseif($fehler == 2) {
-		$fehler = '<font color="red">Kein PnP Wert vorhanden</font>'; 
+		$fehler = '<font color="red">No PnP present</font>'; 
 		}
 		else {
 		$fehler = ''; 

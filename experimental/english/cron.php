@@ -1,7 +1,7 @@
 <?php
 /*
 Created by Tim Reinartz as part of the Bachelor Thesis
-last update 04.06.11 12:45 Uhr
+last update 05.06.11 13:03 Uhr
 The object of the file:
 File for update may be called via cron
 */
@@ -23,7 +23,7 @@ if (ob_get_level() == 0) {
 		//now is string
 		$xml = simplexml_load_string($page);
 		if($xml) { //test whether "well-formed" or valid XML
-		echo 'XML Datei ist Fehlerfrei bzw. Wohlgeformt wird verarbeitet ... ';
+		echo 'XML File is error-free and well-formed processing ... ';
     flush();
     ob_flush();
 		foreach ($xml->table->gewaesser as $gewaesser) {
@@ -32,9 +32,9 @@ if (ob_get_level() == 0) {
             }
 		}
         } else {
-            echo '<p>Die Datei '. $xmlname .' enhaelt fehler</p>';
+            echo '<p>Error in '. $xmlname .' </p>';;
         }
-		echo "fertig";
+		echo "done";
 ob_end_flush();
 		?>
 	<br><br>

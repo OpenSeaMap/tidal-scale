@@ -1,7 +1,7 @@
 <div>
-<p><b>Daten von SOAP Schnittstelle lokal speichern</b></p>
+<p><b>save data from SOAP interface local</b></p>
 <p>
-Nun werden die Daten von der SOAP Schnittstelle empfangen:<br><br>
+The data from the SOAP interface is received:<br><br>
 <?php
 //api file
 require(PATH_CLASSES.'soap.class.php');
@@ -20,7 +20,7 @@ $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>";
 
 $xml .= "
 <data>
-<title>Aktuelle Wasserstaende selbst aus soap schnittstelle geholt und als xml nutzbar gemacht</title>
+<title>Current water levels from soap interface retrieved and made available as xml</title>
 <table>";
 			
 foreach ($arrPegel as $pegelinformation) {
@@ -65,13 +65,13 @@ $file=fopen($datei,"w+");
 fputs($file,$xml);
 fclose($file);
 
-echo "soap xml erstellen erfolgreich";
+echo "soap xml created";
 //write to logfile
-$msg = "soap xml erstellen erfolgreich";
+$msg = "soap xml created";
 Log::write(LOG_SOAP, $msg);
 ?>
 
 </p>
-<p>Klicken Sie auf &quot;Weiter&quot; um fortzufahren</p>
+<p>Click &quot;Next&quot; to continue</p>
 </div>
-<div><input type="submit" value="Weiter" /></div>
+<div><input type="submit" value="Next" /></div>

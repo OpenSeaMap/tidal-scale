@@ -1,7 +1,7 @@
 <?php
 /*
 Created by Tim Reinartz as part of the Bachelor Thesis
-last update 04.06.11 12:57 Uhr
+last update 05.06.11 13:03 Uhr
 The object of the file:
 The index file of installation / upgrade.
 */
@@ -37,7 +37,7 @@ if (INSTALL) {
 ?>
 <html>
 <head>
-	<title>Installation des Dienstes</title>
+	<title>Service Installation</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<style type="text/css"><!--
 		.percents {
@@ -57,9 +57,9 @@ if (INSTALL) {
 		</style>	
 </head>
 <body>
-<h1>Installation des Dienstes</h1>
+<h1>Service Installation</h1>
 	<div style="float:left;width:25%;">
-		<h3>Installationsschritte:</h3>
+		<h3>Installation Steps:</h3>
 		<ul>
 		<?php
 		//the individual steps are shown
@@ -86,7 +86,7 @@ if (INSTALL) {
 	<div style="float:left;width:75%;">
 		<form method="post" action="index.php?step=<?php echo $nextstep; ?>">
 		<div>
-			<h3>Aktueller Schritt: <?php echo $steps[$step]; ?></h3>
+			<h3>Current Step: <?php echo $steps[$step]; ?></h3>
 			<?php include('install/steps/'.$step.'.php'); ?>
 		</div>
 		</form>
@@ -102,7 +102,7 @@ if (INSTALL) {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <html>
     <head>
-        <title>Aktualisierung der Daten</title>
+        <title>Updating of data</title>
 		<style type="text/css"><!--
 		.percents {
 		 background: #FFF;
@@ -121,13 +121,13 @@ if (INSTALL) {
 		</style>
     </head>
     <body>
-<h1>Aktualisierung der Daten</h1>
+<h1>Updating of data</h1>
 <div style="float:left;width:25%;">
-<h3>Schritt:</h3>
-<li><b>Die Pegel-Daten werden aktualisiert</b></li>
+<h3>Step:</h3>
+<li><b>The level data is updated</b></li>
 </div>
 <div style="float:left;width:75%;">
-<h3>Fortschritt:</h3>
+<h3>Progress:</h3>
 <?php
 if (ob_get_level() == 0) {
     ob_start();
@@ -137,7 +137,7 @@ if (ob_get_level() == 0) {
 		//now is string
 		$xml = simplexml_load_string($page);
 		if($xml) { //test whether "well-formed" or valid XML
-		echo 'XML Datei ist Fehlerfrei bzw. Wohlgeformt wird verarbeitet ... ';
+		echo 'XML File is error-free and well-formed processing ... ';
 
 flush();
 ob_flush();
@@ -147,15 +147,15 @@ $temp = 0;
 	//$anzahl = intval(sizeof($gewaesser)/10);
 	$anzahl = count($item)/10;
 	$temp = $temp + $anzahl;
-	echo '<div class="percents">' . $temp . 'Daten&nbsp;verarbeitet</div>';
+	echo '<div class="percents">' . $temp . 'Data&nbsp;processing</div>';
 				Daten::save_update_xml_shell($pegelnummer = $item->pegelnummer, $pegelname = $item->pegelname, $km = $item->km, $messwert = $item->messwert, $datum = $item->datum, $uhrzeit = $item->uhrzeit, $pnp = $item->pnp, $tendenz = $item->tendenz);
             }
 		}
 	echo '<div class="percents">Done.</div>';
         } else {
-            echo '<p>Die Datei '. $xmlname .' enhaelt fehler</p>';
+            echo '<p>Error in '. $xmlname .' </p>';
         }
-		echo "fertig";
+		echo "done";
 ob_end_flush();
 		?>
 </div>
